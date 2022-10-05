@@ -1,4 +1,5 @@
 import "dotenv/config";
+import open from 'open'
 
 process.on("uncaughtException", (err: Error) => {
   console.log("UNCAUGHT EXCEPTION! 💥 Shutting down...");
@@ -12,6 +13,10 @@ const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
   console.log(`App running on port ${port}...`);
 });
+
+if (process.env.NODE_ENV === "development") {
+  open(`http://localhost:${port}`);
+}
 
 process.on("unhandledRejection", (err: Error) => {
   console.log("UNHANDLED REJECTION! 💥 Shutting down...");

@@ -1,0 +1,1726 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Barefoot Nomad API Documentation",
+      "description": "Make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web.",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "stackup2-barefoot-backend-stag.herokuapp.com",
+    "basePath": "/api",
+    "schemes": [
+      "https"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/auth/signup": {
+        "post": {
+          "summary": "create an account",
+          "tags": [
+            "Sign up"
+          ],
+          "description": "User sign up endpoint",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "User information",
+              "in": "body",
+              "description": "User information required for sign up",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/signup"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Created",
+              "schema": {
+                "$ref": "#/responses/signupSuccess"
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "schema": {
+                "$ref": "#/responses/signupFail"
+              }
+            }
+          }
+        }
+      },
+      "/auth/login": {
+        "post": {
+          "summary": "User Login",
+          "tags": [
+            "User Login"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/x-www-form-urlencoded"
+          ],
+          "parameters": [
+            {
+              "name": "email",
+              "in": "formData",
+              "required": true,
+              "type": "string",
+              "format": "email",
+              "description": "Email for securing user's account"
+            },
+            {
+              "name": "password",
+              "in": "formData",
+              "required": true,
+              "type": "string",
+              "format": "password",
+              "description": "Password for authentication"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "This is how the response looks like when login is successful",
+              "schema": {
+                "$ref": "#/login-definition/login-response-real-data"
+              }
+            },
+            "400": {
+              "description": "This is how the response looks like when a user sends empty email, or empty password or both empty",
+              "schema": {
+                "$ref": "#/login-definition/login-response-empty-data"
+              }
+            },
+            "401": {
+              "description": "This is how the response looks like when a user sends wrong email or password",
+              "schema": {
+                "$ref": "#/login-definition/login-response-wrong-data"
+              }
+            }
+          }
+        }
+      },
+      "/auth/resetpassword": {
+        "post": {
+          "summary": "Reset email",
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "User email",
+              "in": "body",
+              "description": "email for a user ",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/resetEmail"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "This is how the response looks like when user exist and an email is successful sent",
+              "schema": {
+                "$ref": "#/responses/reset-password-email-success"
+              }
+            },
+            "400": {
+              "description": "This is how the response looks like when there occured an error",
+              "schema": {
+                "$ref": "#/responses/reset-password-email-error"
+              }
+            },
+            "403": {
+              "description": "This is how the response looks like when a user does not exist",
+              "schema": {
+                "$ref": "#/responses/reset-password-email-fail"
+              }
+            }
+          }
+        }
+      },
+      "/auth/resetpassord/:token": {
+        "post": {
+          "summary": "update password",
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "User password",
+              "in": "body",
+              "description": "the new password ",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/updatePassword"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "This is the response when password is updated",
+              "schema": {
+                "$ref": "#/responses/update-password-success"
+              }
+            },
+            "400": {
+              "description": "This is the response when occured an error while updating",
+              "schema": {
+                "$ref": "#/responses/reset-password-email-error"
+              }
+            }
+          }
+        }
+      },
+      "/trips": {
+        "post": {
+          "summary": "create a one way trip request",
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Travel from",
+              "in": "body",
+              "description": "a place where requester travels from",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/OneWaytripRequest"
+              }
+            },
+            {
+              "name": "Travel to",
+              "in": "body",
+              "description": "a place where requester wishes to travel to",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/OneWaytripRequest"
+              }
+            },
+            {
+              "name": "Travel reason",
+              "in": "body",
+              "description": "the reason for the trip",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/OneWaytripRequest"
+              }
+            },
+            {
+              "name": "Travel date",
+              "in": "body",
+              "description": "date requester wishes to take the trip",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/OneWaytripRequest"
+              }
+            },
+            {
+              "name": "Return date",
+              "in": "body",
+              "description": "date requester wishes to return from the trip",
+              "required": false,
+              "schema": {
+                "$ref": "#/definitions/OneWaytripRequest"
+              }
+            },
+            
+            {
+              "name": "Travel type",
+              "in": "body",
+              "description": "the type of trip the requester wishes to make",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/OneWaytripRequest"
+              }
+            },
+            {
+              "name": "Accommodation",
+              "in": "body",
+              "description": "wether requester wants accommodation",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/OneWaytripRequest"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Trip request successfuly created",
+              "schema": {
+                "$ref": "#/responses/trip-request-success"
+              }
+            },
+            "400": {
+              "description": "failed to create a trip request due to invalid input",
+              "schema": {
+                "$ref": "#/responses/trip-request-fail"
+              }
+            },
+            "401": {
+              "description": "access denied to protected resource",
+              "schema": {
+                "$ref": "#/responses/trip-request-unauthorized"
+              }
+            }
+          }
+        }
+      },
+      "/profile": {
+        "get": {
+          "summary": "Get currently logged in user's profile",
+          "tags": [
+            "User profile"
+          ],
+          "description": "After a user logged-in, this is an API to get that user's profile endpoint",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "User authentication token",
+              "in": "body",
+              "description": "After login or signup you get a token, that token is the one you paste in here",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/userProfileHeaders"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Profile retrieval success",
+              "schema": {
+                "$ref": "#/responses/profileRetrievalSuccess"
+              }
+            },
+            "404": {
+              "description": "Profile not found",
+              "schema": {
+                "$ref": "#/responses/profileNotFound"
+              }
+            },
+            "403": {
+              "description": "Unverified account",
+              "schema": {
+                "$ref": "#/responses/verifyYourAccount"
+              }
+            }
+          }
+        },
+        "patch": {
+          "summary": "Update user's profile",
+          "tags": [
+            "User profile"
+          ],
+          "description": "Update user profile endpoint",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "email",
+              "in": "formData",
+              "required": true,
+              "type": "string",
+              "format": "email",
+              "description": "Email for securing user's account"
+            },
+            {
+              "name": "password",
+              "in": "formData",
+              "required": true,
+              "type": "string",
+              "format": "password",
+              "description": "Password for authentication"
+            },
+            {
+              "name": "firstName",
+              "in": "formData",
+              "required": false,
+              "type": "string",
+              "format": "text",
+              "description": "User's first name"
+            },
+            {
+              "name": "lastName",
+              "in": "formData",
+              "required": false,
+              "type": "string",
+              "format": "text",
+              "description": "User's last name"
+            },
+            {
+              "name": "username",
+              "in": "formData",
+              "required": false,
+              "type": "string",
+              "format": "text",
+              "description": "User's new username"
+            },
+            {
+              "name": "gender",
+              "in": "formData",
+              "required": false,
+              "type": "string",
+              "format": "text",
+              "description": "User's gender"
+            },
+            {
+              "name": "address",
+              "in": "formData",
+              "required": false,
+              "type": "string",
+              "format": "text",
+              "description": "User's address (city - state)"
+            },
+            {
+              "name": "role",
+              "in": "formData",
+              "required": false,
+              "type": "string",
+              "format": "text",
+              "description": "User's role"
+            },
+            {
+              "name": "birthDate",
+              "in": "formData",
+              "required": false,
+              "type": "string",
+              "format": "text",
+              "description": "User's birthDate"
+            },
+            {
+              "name": "preferredLanguage",
+              "in": "formData",
+              "required": false,
+              "type": "string",
+              "format": "text",
+              "description": "User's preferredLanguage"
+            },
+            {
+              "name": "preferredCurrency",
+              "in": "formData",
+              "required": false,
+              "type": "string",
+              "format": "text",
+              "description": "User's preferredCurrency"
+            },
+            {
+              "name": "department",
+              "in": "formData",
+              "required": false,
+              "type": "string",
+              "format": "text",
+              "description": "The department where you work"
+            },
+            {
+              "name": "lineManager",
+              "in": "formData",
+              "required": false,
+              "type": "string",
+              "format": "text",
+              "description": "Line manager name"
+            },
+            {
+              "name": "idCardNumber",
+              "in": "formData",
+              "required": false,
+              "type": "string",
+              "format": "text",
+              "description": "National identity card number or passport"
+            },
+            {
+              "name": "phoneNumber",
+              "in": "formData",
+              "required": false,
+              "type": "string",
+              "format": "text",
+              "description": "user's phone number including country code"
+            },
+            {
+              "name": "profileImage",
+              "in": "formData",
+              "required": false,
+              "type": "string",
+              "format": "file",
+              "description": "URL to the profile picture of a user"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Profile update success",
+              "schema": {
+                "$ref": "#/responses/profileRetrievalSuccess"
+              }
+            },
+            "403": {
+              "description": "Unverified account",
+              "schema": {
+                "$ref": "#/responses/verifyYourAccount"
+              }
+            }
+          }
+        }
+      },
+      "/profile/:username": {
+        "get": {
+          "summary": "Get any user's profile",
+          "tags": [
+            "User profile"
+          ],
+          "description": "After a user logged-in, this is an API that helps to get any user's profile endpoint",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "User authentication token",
+              "in": "body",
+              "description": "After login or signup you get a token, that token is the one you paste in here",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/userProfileHeaders"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Profile retrieval success",
+              "schema": {
+                "$ref": "#/responses/profileRetrievalSuccess"
+              }
+            },
+            "404": {
+              "description": "Profile not found",
+              "schema": {
+                "$ref": "#/responses/profileNotFound"
+              }
+            },
+            "403": {
+              "description": "Unverified account",
+              "schema": {
+                "$ref": "#/responses/verifyYourAccount"
+              }
+            }
+          }
+        }
+      },
+      "/profile/password": {
+        "patch": {
+          "summary": "User change his password",
+          "tags": [
+            "User profile"
+          ],
+          "description": "User update his profile",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "User authentication token",
+              "in": "headers",
+              "description": "After login or signup you get a token, that token is the one you paste in here",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/userProfileHeaders"
+              }
+            },
+            {
+              "name": "User authentication token",
+              "in": "body",
+              "description": "Params you need to send with change password",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/changePasswordParams"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Your password has been changed successfully",
+              "schema": {
+                "$ref": "#/responses/update-password-success"
+              }
+            },
+            "400": {
+              "description": "Old password required",
+              "schema": {
+                "$ref": "#/responses/old-password-required"
+              }
+            },
+            "401": {
+              "description": "Incorrect old password",
+              "schema": {
+                "$ref": "#/responses/incorrect-old-password"
+              }
+            }
+          }
+        }
+      },
+      "/api/auth/facebook": {
+        "get": {
+          "summary": "Login using facebook account",
+          "tags": [
+            "User Login"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/x-www-form-urlencoded"
+          ],
+          "responses": {
+            "200": {
+              "description": "The user is successufully authenticated by facebook"
+            }
+          }
+        }
+      },
+      "/auth/google": {
+        "get": {
+          "summary": "Login using google account",
+          "tags": [
+            "User Login"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/x-www-form-urlencoded"
+          ],
+          "responses": {
+            "200": {
+              "description": "The user is successufully authenticated by google"
+            }
+          }
+        }
+      },
+      "/auth/logout": {
+        "get": {
+          "summary": "Log out",
+          "tags": [
+            "Log out"
+          ],
+          "description": "User logout endpoint",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "User information",
+              "in": "headers",
+              "description": "User information required for logout",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/logout"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/responses/logout-success"
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "schema": {
+                "$ref": "#/responses/logout-fail-bad-request"
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "schema": {
+                "$ref": "#/responses/logout-fail-unauthorized"
+              }
+            }
+          }
+        }
+      },
+      "/api/trips/most-traveled-destinations": {
+        "get": {
+          "summary": "Get most traveled destinations",
+          "tags": [
+            "Trips"
+          ],
+          "description": "This end point, helps to get the most traveled destinations in desc order",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Currently logged in user token",
+              "in": "headers",
+              "description": "Currently logged in user token is required to be sent as a bearer token",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/currLoggedInToken"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/responses/placeRetrieved"
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "schema": {
+                "$ref": "#/responses/noTripYet"
+              }
+            }
+          }
+        }
+      },
+      "/api/trips/:requestId/comment": {
+        "post": {
+          "summary": "Post comment on a travel-request",
+          "tags": [
+            "Trips"
+          ],
+          "description": "This end point, helps to post comments on a trip request",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Currently logged in user token",
+              "in": "headers",
+              "description": "Currently logged in user token is required to be sent as a bearer token",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/currLoggedInToken"
+              }
+            }
+            ,{
+              "name":"comment body",
+              "in":"formData",
+              "required":true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/responses/commentAdded"
+              }
+            }
+          }
+        }
+      },
+      "/api/trips/comment?requestId=reqId": {
+        "get": {
+          "summary": "Get comments on a travel-request",
+          "tags": [
+            "Trips"
+          ],
+          "description": "This end point, helps to get all comments on a trip-request, you can also retrieve in pages in this format /api/trips/comment?requestId=reqId&page=pageNumber",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Currently logged in user token",
+              "in": "headers",
+              "description": "Currently logged in user token is required to be sent as a bearer token",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/currLoggedInToken"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/responses/commentRetrievedSuccessfully"
+              }
+            }
+          }
+        }
+      },
+      "/api/trips?page=pageNumber": {
+        "get": {
+          "summary": "Gets a list of all requests a user have submitted to barefootnomad so far",
+          "tags": [
+            "Trips"
+          ],
+          "description": "This end point, helps to get all requests, you can also retrieve in pages in this format /api/trips/comment?requestId=reqId&page=pageNumber",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Currently logged in user token",
+              "in": "headers",
+              "description": "Currently logged in user token is required to be sent as a bearer token",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/currLoggedInToken"
+              }
+            },
+            {
+              "name": "Page number",
+              "in": "query",
+              "description": "If you want to get requests in pages, when you pass page number, you will get 10 requests per page",
+              "required": false
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/responses/requestRetrievedSuccessfully"
+              }
+            }
+          }
+        }
+      },    
+      "/api/trips/comment/:commentId": {
+        "patch": {
+          "summary": "Update a comments",
+          "tags": [
+            "Trips"
+          ],
+          "description": "This end point, helps to update comments on the request",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Currently logged in user token",
+              "in": "headers",
+              "description": "Currently logged in user token is required to be sent as a bearer token",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/currLoggedInToken"
+              }
+            },
+            {
+              "name": "Comment",
+              "in": "formData",
+              "description": "Currently logged in user token is required to be sent as a bearer token",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/currLoggedInToken"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/responses/commentUpdated"
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete a comment on a travel-request",
+          "tags": [
+            "Trips"
+          ],
+          "description": "This endpoint, helps to delete a comment from a request",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Currently logged in user token",
+              "in": "headers",
+              "description": "Currently logged in user token is required to be sent as a bearer token",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/currLoggedInToken"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/responses/commentDeleted"
+              }
+            }
+          }
+        }
+      },
+      "/roles/assign-role": {
+        "patch": {
+          "summary": "assign role",
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "email",
+              "in": "body",
+              "description": "email for a user",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/assignRole"
+              }
+            },
+            {
+              "name": "role",
+              "in": "body",
+              "description": "a role to assign to a user ",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/assignRole"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "This is how the response looks like when user is assigned a role",
+              "schema": {
+                "$ref": "#/responses/assign-role-success"
+              }
+            },
+            "400": {
+              "description": "This is how the response looks like when occured an error",
+              "schema": {
+                "$ref": "#/responses/assign-role-error"
+              }
+            },
+            "403": {
+              "description": "This is how the response looks like when a user does not exist",
+              "schema": {
+                "$ref": "#/responses/assign-role-not-exist"
+              }
+            },
+            "401": {
+              "description": "This is how the response looks like when a user is not allowed to assign role",
+              "schema": {
+                "$ref": "#/responses/assign-role-not-authorized"
+              }
+            }
+          }
+        }
+      },
+      "/trips/search": {
+        "get": {
+          "summary": "Searches a user(requester)'s trip requests",
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "field",
+              "in": "query",
+              "description": "a preferred field/column to perform search against",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/SearchTripRequests"
+              }
+            },
+            {
+              "name": "search",
+              "in": "query",
+              "description": "a term to search for on the selected field",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/SearchTripRequests"
+              }
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "description": "a positive number representing how many results to return as a response",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/SearchTripRequests"
+              }
+            },
+            {
+              "name": "offset",
+              "in": "query",
+              "description": "a positive number used for paging(server side) results",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/SearchTripRequests"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successfully retrieved trips stats",
+              "schema": {
+                "$ref": "#/responses/view-trips-stats-success"
+              }
+            },
+            "400": {
+              "description": "Failed to retrieve trips stats due to bad user input",
+              "schema": {
+                "$ref": "#/responses/view-trips-stats-fail"
+              }
+            },
+            "401": {
+              "description": "access denied to protected resource",
+              "schema": {
+                "$ref": "#/responses/trip-request-unauthorized"
+              }
+            }
+          }
+        }
+      },
+      "/trips/stats": {
+        "get": {
+          "summary": "Retrieves users' trips stats",
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Start date",
+              "in": "query",
+              "description": "a preferred start date for stats",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/TripsStats"
+              }
+            },
+            {
+              "name": "End date",
+              "in": "query",
+              "description": "a preferred end date for stats",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/TripsStats"
+              }
+            }
+          ]
+        }
+      },
+      "/trips/update/:requestId": {
+        "patch": {
+          "summary": "edit travel request",
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {"name": "Travel from",
+              "in": "body",
+              "description": "a place where requester travels from",
+              "required": false,
+              "schema": {
+                "$ref": "#/definitions/OneWaytripRequest"
+              }
+            },
+            {
+              "name": "Travel to",
+              "in": "body",
+              "description": "a place where requester wishes to travel to",
+              "required": false,
+              "schema": {
+                "$ref": "#/definitions/OneWaytripRequest"
+              }
+            },
+            {
+              "name": "Travel reason",
+              "in": "body",
+              "description": "the reason for the trip",
+              "required": false,
+              "schema": {
+                "$ref": "#/definitions/OneWaytripRequest"
+              }
+            },
+            {
+              "name": "Travel date",
+              "in": "body",
+              "description": "date requester wishes to take the trip",
+              "required": false,
+              "schema": {
+                "$ref": "#/definitions/OneWaytripRequest"
+              }
+            },
+            {
+              "name": "Return date",
+              "in": "body",
+              "description": "date requester wishes to return from the trip",
+              "required": false,
+              "schema": {
+                "$ref": "#/definitions/OneWaytripRequest"
+              }
+            },
+            
+            {
+              "name": "Travel type",
+              "in": "body",
+              "description": "the type of trip the requester wishes to make",
+              "required": false,
+              "schema": {
+                "$ref": "#/definitions/OneWaytripRequest"
+              }
+            },
+            {
+              "name": "Accommodation",
+              "in": "body",
+              "description": "wether requester wants accommodation",
+              "required": false,
+              "schema": {
+                "$ref": "#/definitions/OneWaytripRequest"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "This is how the response looks like when request is updated",
+              "schema": {
+                "$ref": "#/responses/trip-request-update"
+              }
+            },
+            "400": {
+              "description": "failed to create a trip request due to invalid input",
+              "schema": {
+                "$ref": "#/responses/trip-request-fail"
+              }
+            },
+            "401": {
+              "description": "access denied to protected resource",
+              "schema": {
+                "$ref": "#/responses/trip-request-unauthorized"
+              }
+            }
+          }
+        }
+      },
+      "/accommodations/book": {
+        "post": {
+          "summary": "book an accommodation facility",
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "arrivalDate",
+              "in": "body",
+              "description": "Date of arrival to the premise",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/BookAccommodation"
+              }
+            },
+            {
+              "name": "arrivalDate",
+              "in": "body",
+              "description": "Date of departure from the premise",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/BookAccommodation"
+              }
+            },
+            {
+              "name": "tripRequestId",
+              "in": "body",
+              "description": "A unique id of a trip request from which to book accommodation",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/BookAccommodation"
+              }
+            },
+            {
+              "name": "accommodationId",
+              "in": "body",
+              "description": "A unique id of an accommodation facility to book",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/BookAccommodation"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "definitions": {
+      "signup": {
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "required": true,
+            "example": "John"
+          },
+          "lastName": {
+            "type": "string",
+            "required": true,
+            "example": "Doe"
+          },
+          "email": {
+            "type": "string",
+            "required": true,
+            "example": "john@doe.com"
+          },
+          "address": {
+            "type": "string",
+            "required": true,
+            "example": "Kigali, Rwanda"
+          },
+          "password": {
+            "type": "string",
+            "required": true,
+            "example": "hellothere"
+          },
+          "gender": {
+            "type": "string",
+            "required": true,
+            "example": "Male"
+          }
+        }
+      },
+      "userProfileHeaders": {
+        "properties": {
+          "toke": {
+            "type": "string",
+            "required": true,
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+          }
+        }
+      },
+      "changePasswordParams": {
+        "properties": {
+          "newPassword": {
+            "type": "password",
+            "required": true,
+            "example": "JohnDoe1"
+          },
+          "oldPassword": {
+            "type": "password",
+            "required": true,
+            "example": "yoURPassword23"
+          }
+        }
+      },
+      "resetEmail": {
+        "email": {
+          "type": "string",
+          "required": true,
+          "example": "john@doe.com"
+        }
+      },
+      "updatePassword": {
+        "password": {
+          "type": "string",
+          "required": true,
+          "example": "didiny"
+        }
+      },
+      "OneWaytripRequest": {
+        "travelFrom": {
+          "type": "string",
+          "required": true,
+          "example": "Kigali"
+        },
+        "travelTo": {
+          "type": "string",
+          "required": true,
+          "example": "Butare"
+        },
+        "travelReason": {
+          "type": "string",
+          "required": true,
+          "example": "Business meeting"
+        },
+        "travelDate": {
+          "type": "date",
+          "required": true,
+          "example": "2020-03-14T15:12:22.360Z"
+        },
+        "returnDate": {
+          "type": "date",
+          "required": false,
+          "example": "2020-03-14T15:12:22.360Z"
+        },
+        "travelType": {
+          "type": "string",
+          "required": true,
+          "example": "One-way"
+        },
+        "accommodation": {
+          "type": "boolean",
+          "required": true,
+          "example": true
+        }
+      },
+      "logout": {
+        "properties": {
+          "Authorization": {
+            "type": "string",
+            "required": true,
+            "example": "Bearer {{token}}"
+          }
+        }
+      },
+      "currLoggedInToken": {
+        "properties": {
+          "Authorization": {
+            "type": "string",
+            "required": true,
+            "example": "Bearer {{token}}"
+          }
+        }
+      },
+      "assignRole": {
+        "email": {
+          "type": "string",
+          "required": true,
+          "example": "john@doe.com"
+        },
+        "role": {
+          "type": "string",
+          "required": true,
+          "example": "manager"
+        }
+      },
+      "SearchTripRequests": {
+        "field": {
+          "type": "string",
+          "required": true,
+          "example": "travelDate"
+        },
+        "search": {
+          "type": "string",
+          "required": true,
+          "example": "2020-01-01"
+        },
+        "limit": {
+          "type": "integer",
+          "required": true,
+          "example": "30"
+        },
+        "offset": {
+          "type": "integer",
+          "required": true,
+          "example": "0"
+        }
+      },
+      "ViewTripsStats": {
+        "startDate": {
+          "type": "date",
+          "required": true,
+          "example": "2020-01-01"
+        },
+        "endDate": {
+          "type": "date",
+          "required": true,
+          "example": "2020-01-08"
+        }
+      },
+      "BookAccommodation": {
+        "arrivalDate": {
+          "type": "date",
+          "required": true,
+          "example": "2020-01-01"
+        },
+        "departureDate": {
+          "type": "date",
+          "required": true,
+          "example": "2020-01-01"
+        },
+        "tripRequestId": {
+          "type": "number",
+          "required": true,
+          "example": 1
+        },
+        "accommodationId": {
+          "type": "number",
+          "required": true,
+          "example": 1
+        }
+      }
+    },
+    "responses": {
+      "signupSuccess": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Account created successfully"
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR....."
+          }
+        }
+      },
+      "signupFail": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "Sign up failed! Please try again later"
+          }
+        }
+      },
+      "reset-password-email-success": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "The email has sent successful"
+          }
+        }
+      },
+      "reset-password-email-fail": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "User does not exist"
+          }
+        }
+      },
+      "reset-password-email-error": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "occured a error"
+          }
+        }
+      },
+      "update-password-fail": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "User does not exist"
+          }
+        }
+      },
+      "update-password-success": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Your password has been changed, login with new password"
+          }
+        }
+      },
+      "old-password-required": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "enter your old password"
+          }
+        }
+      },
+      "incorrect-old-password": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "You have entered incorrect old password, if you have forgotten your password, logout and reset your password."
+          }
+        }
+      },
+      "profileRetrievalSuccess": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "You profile is successfully retrieved"
+          },
+          "data": {
+            "type": "object",
+            "example": {
+              "firstName": "John",
+              "lastName": "Doe"
+            }
+          }
+        }
+      },
+      "profileNotFound": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "The user you are trying ton search doesn't exist on our system"
+          }
+        }
+      },
+      "verifyYourAccount": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "You need to verify your account, before getting to profiles"
+          }
+        }
+      },
+      "trip-request-success": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "trip request successfuly created and waiting for manager approval"
+          }
+        }
+      },
+      "trip-request-fail": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "The travel date must be in future, not more than 6 months from now and look like 2001-01-01"
+          }
+        }
+      },
+      "trip-request-unauthorized": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "access denied, you must login to use this resource"
+          }
+        }
+      },
+      "login-definition": {
+        "login-response-real-data": {
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "successfully logged in"
+            },
+            "token": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+            }
+          }
+        },
+        "login-response-wrong-data": {
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "unknown credentials"
+            }
+          }
+        },
+        "login-response-empty-data": {
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "enter your email or password"
+            }
+          }
+        },
+        "notLoggedInUser": {
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "You are not allowed to access this resources, login or signup first"
+            }
+          }
+        }
+      },
+      "logout-success": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Logout successful"
+          }
+        }
+      },
+      "placeRetrieved": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Successfully retrieved destinations and their visit times"
+          },
+          "data":{
+            "type":"array",
+            "example":{
+            }
+          }
+        }
+      },
+      "commentAdded": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Your comment is added successfully"
+          },
+          "data":{
+            "type":"object",
+            "example":{
+            }
+          }
+        }
+      },
+      "commentRetrievedSuccessfully": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Comment retrieved successfully"
+          },
+          "data":{
+            "type":"object",
+            "example":{
+            }
+          }
+        }
+      },
+      "requestRetrievedSuccessfully": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Requests have been retrieved successfully"
+          },
+          "data":{
+            "type":"object",
+            "example":{
+            }
+          }
+        }
+      },
+      "commentUpdated": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Comment updated successfully"
+          },
+          "data":{
+            "type":"object",
+            "example":{
+            }
+          }
+        }
+      },
+      "commentDeleted": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Comment Deleted successfully"
+          },
+          "data":{
+            "type":"object",
+            "example":{
+            }
+          }
+        }
+      },
+      "logout-fail-bad-request": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Authentication failed. Token is missing"
+          }
+        }
+      },
+      "noTripYet": {
+        "properties": {
+          "error": {
+            "type": "String",
+            "example": "Data not available for now, because there is no any trip yet, please try again later"
+          }
+        }
+      },
+      "logout-fail-unauthorized": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Sorry, we were unable to verify your identity, you must login to use this resource"
+          }
+        }
+      },
+      "assign-role-success": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Role assigned to user successfully"
+          }
+        }
+      },
+      "assign-role-error": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "That is the existing role for this user"
+          }
+        }
+      },
+      "assign-role-not-exist": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "User does not exist"
+          }
+        }
+      },
+      "assign-role-not-authorized": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "You can not change the role for the super user"
+          }
+        } 
+      },
+      "search-trip-requests-empty-search-term": {
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "Please specify a valid search term, it must not be empty"
+          }
+        } 
+      },
+      "view-trips-stats-success": {
+        "properties": {
+          "data": {
+            "type": "object",
+            "example": {
+              "data": {
+                "startDate": "2020-01-01T00:00:00.000Z",
+                "endDate": "2020-02-23T00:00:00.000Z",
+                "tripsMade": 0
+              }
+            }
+          }
+        }
+      },
+      "view-trips-stats-fail": {
+        "properties": {
+          "error": {
+            "type": "object",
+            "example": {
+              "error": "Please provide an end date for the stats, ..."
+            }
+          }
+        }
+      },
+      "trip-request-update": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": {
+            "message":"The request is updated successfully"
+            }
+          }
+        }
+      }
+    }
+  }
+  
