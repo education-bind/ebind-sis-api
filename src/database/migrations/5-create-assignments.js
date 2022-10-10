@@ -1,82 +1,82 @@
-'use strict';
+"use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('assignments', {
+    await queryInterface.createTable("assignments", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       assignmentCategoryId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'assignment_categories',
-          key: 'id',
+          model: "assignment_categories",
+          key: "id",
         },
-        onDelete: 'RESTRICT',
-        onUpdate: 'CASCADE',
+        onDelete: "RESTRICT",
+        onUpdate: "CASCADE",
       },
       scoreEntryPoints: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       scoreTypeId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'score_types',
-          key: 'id',
+          model: "score_types",
+          key: "id",
         },
-        onDelete: 'RESTRICT',
-        onUpdate: 'CASCADE',
+        onDelete: "RESTRICT",
+        onUpdate: "CASCADE",
       },
       description: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
       },
       publishScoreDate: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       active: {
         type: Sequelize.BOOLEAN,
-        defaultValue: true
+        defaultValue: true,
       },
       moduleId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       moduleType: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       createdBy: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       assignmentType: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       eAssignmentId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'e_assignment',
-          key: 'id',
+          model: "e_assignments",
+          key: "id",
         },
-        onDelete: 'RESTRICT',
-        onUpdate: 'CASCADE',
+        onDelete: "RESTRICT",
+        onUpdate: "CASCADE",
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('assignments');
-  }
+    await queryInterface.dropTable("assignments");
+  },
 };

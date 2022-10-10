@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class assignments extends Model {
     /**
@@ -9,26 +7,42 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
+    static associate({ assignment_categories, score_types, e_assignment }) {
+      this.belongsTo(assignment_categories, {
+        foreignKey: "assignmentCategoryId",
+        as: "assignmentCategory",
+      });
+      this.belongsTo(score_types, {
+        foreignKey: "scoreTypeId",
+        as: "scoreType",
+      });
+      this.belongsTo(e_assignment, {
+        foreignKey: "eAssignmentId",
+        as: "eLearningAssignment",
+      });
+    }
+    toJSON() {
+      return {
+        ...this.get(),
+      };
     }
   }
-  assignments.init({
-    name: DataTypes.STRING,
-    assignmentCategoryId: DataTypes.INTEGER,
-    scoreEntryPoints: DataTypes.INTEGER,
-    scoreTypeId: DataTypes.INTEGER,
-    description: DataTypes.TEXT,
-    publishScoreDate: DataTypes.DATE,
-    active: DataTypes.BOOLEAN,
-    moduleId: DataTypes.INTEGER,
-    moduleType: DataTypes.STRING,
-    createdBy: DataTypes.INTEGER,
-    assignmentType: DataTypes.STRING,
-    eAssignmentId: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'assignments',
-  });
+  assignments.init(
+    {
+      name: DataTypes.STRING,
+      scoreEntryPoints: DataTypes.INTEGER,
+      description: DataTypes.TEXT,
+      publishScoreDate: DataTypes.DATE,
+      active: DataTypes.BOOLEAN,
+      moduleId: DataTypes.INTEGER,
+      moduleType: DataTypes.STRING,
+      createdBy: DataTypes.INTEGER,
+      assignmentType: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: "assignments",
+    }
+  );
   return assignments;
 };

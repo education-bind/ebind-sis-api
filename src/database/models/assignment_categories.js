@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class assignment_categories extends Model {
     /**
@@ -9,20 +7,30 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
+    static associate({ s_facilties, schools }) {
+      this.belongsTo(s_facilties, {
+        foreignKey: "schoolFaciltyId",
+        as: "schoolFacilty",
+      });
+      this.belongsTo(schools, { foreignKey: "schoolId", as: "school" });
+    }
+    toJSON() {
+      return {
+        ...this.get(),
+      };
     }
   }
-  assignment_categories.init({
-    schoolFaciltyId: DataTypes.INTEGER,
-    schoolId: DataTypes.INTEGER,
-    name: DataTypes.STRING,
-    abbreviation: DataTypes.STRING,
-    color: DataTypes.STRING,
-    active: DataTypes.BOOLEAN
-  }, {
-    sequelize,
-    modelName: 'assignment_categories',
-  });
+  assignment_categories.init(
+    {
+      name: DataTypes.STRING,
+      abbreviation: DataTypes.STRING,
+      color: DataTypes.STRING,
+      active: DataTypes.BOOLEAN,
+    },
+    {
+      sequelize,
+      modelName: "assignment_categories",
+    }
+  );
   return assignment_categories;
 };

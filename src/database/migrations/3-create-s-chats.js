@@ -1,84 +1,84 @@
-'use strict';
+"use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('s_chats', {
+    await queryInterface.createTable("s_chats", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       schoolId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'edu_users',
-          key: 'id',
+          model: "edu_users",
+          key: "id",
         },
-        onDelete: 'RESTRICT',
-        onUpdate: 'CASCADE',
+        onDelete: "RESTRICT",
+        onUpdate: "CASCADE",
       },
       userFromId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'edu_users',
-          key: 'id',
+          model: "edu_users",
+          key: "id",
         },
-        onDelete: 'RESTRICT',
-        onUpdate: 'CASCADE',
+        onDelete: "RESTRICT",
+        onUpdate: "CASCADE",
       },
       userToId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'edu_users',
-          key: 'id',
+          model: "edu_users",
+          key: "id",
         },
-        onDelete: 'RESTRICT',
-        onUpdate: 'CASCADE',
+        onDelete: "RESTRICT",
+        onUpdate: "CASCADE",
       },
       messageType: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       messagReplyId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
-          model: 's_chats',
-          key: 'id',
+          model: "s_chats",
+          key: "id",
         },
-        onDelete: 'RESTRICT',
-        onUpdate: 'CASCADE',
+        onDelete: "RESTRICT",
+        onUpdate: "CASCADE",
       },
       file: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
       },
       fileType: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       textMessage: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
       },
       active: {
         type: Sequelize.BOOLEAN,
-        defaultValue: true
+        defaultValue: true,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('s_chats');
-  }
+    await queryInterface.dropTable("s_chats");
+  },
 };

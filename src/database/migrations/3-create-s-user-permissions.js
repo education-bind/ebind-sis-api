@@ -1,62 +1,55 @@
-'use strict';
+"use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('s_user_permissions', {
+    await queryInterface.createTable("s_user_permissions", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       schoolId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'schools',
-          key: 'id',
+          model: "schools",
+          key: "id",
         },
-        onDelete: 'RESTRICT',
-        onUpdate: 'CASCADE',
+        onDelete: "RESTRICT",
+        onUpdate: "CASCADE",
       },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'edu_users',
-          key: 'id',
+          model: "edu_users",
+          key: "id",
         },
-        onDelete: 'RESTRICT',
-        onUpdate: 'CASCADE',
+        onDelete: "RESTRICT",
+        onUpdate: "CASCADE",
       },
-      sPermissionRoleId: {
+      permissionTypeId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 's_permission_roles',
-          key: 'id',
-        },
-        onDelete: 'RESTRICT',
-        onUpdate: 'CASCADE',
       },
       permissionType: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       active: {
         type: Sequelize.BOOLEAN,
-        defaultValue: true
+        defaultValue: true,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('s_user_permissions');
-  }
+    await queryInterface.dropTable("s_user_permissions");
+  },
 };

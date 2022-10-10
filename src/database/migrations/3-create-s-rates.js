@@ -1,55 +1,55 @@
-'use strict';
+"use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('s_rates', {
+    await queryInterface.createTable("s_rates", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
-      guardianIdId: {
+      guardianId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'edu_users',
-          key: 'id',
+          model: "edu_users",
+          key: "id",
         },
-        onDelete: 'RESTRICT',
-        onUpdate: 'CASCADE',
+        onDelete: "RESTRICT",
+        onUpdate: "CASCADE",
       },
       schoolId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'schools',
-          key: 'id',
+          model: "schools",
+          key: "id",
         },
-        onDelete: 'RESTRICT',
-        onUpdate: 'CASCADE',
+        onDelete: "RESTRICT",
+        onUpdate: "CASCADE",
       },
       rate: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       review: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       active: {
         type: Sequelize.BOOLEAN,
-        defaultValue: true
+        defaultValue: true,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('s_rates');
-  }
+    await queryInterface.dropTable("s_rates");
+  },
 };

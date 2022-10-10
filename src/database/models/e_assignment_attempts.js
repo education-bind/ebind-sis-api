@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class e_assignment_attempts extends Model {
     /**
@@ -9,9 +7,12 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ edu_users, eAssignments }) {
-      this.belongsTo(edu_users, { foreignKey: 'userId', as: 'user' });
-      this.belongsTo(eAssignments, { foreignKey: 'eAssignmentId', as: 'eLearningAssignment' });
+    static associate({ edu_users, e_assignments }) {
+      this.belongsTo(edu_users, { foreignKey: "userId", as: "user" });
+      this.belongsTo(e_assignments, {
+        foreignKey: "eAssignmentId",
+        as: "eLearningAssignment",
+      });
     }
     toJSON() {
       return {
@@ -19,12 +20,15 @@ module.exports = (sequelize, DataTypes) => {
       };
     }
   }
-  e_assignment_attempts.init({
-    number: DataTypes.INTEGER,
-    active: DataTypes.BOOLEAN
-  }, {
-    sequelize,
-    modelName: 'e_assignment_attempts',
-  });
+  e_assignment_attempts.init(
+    {
+      number: DataTypes.INTEGER,
+      active: DataTypes.BOOLEAN,
+    },
+    {
+      sequelize,
+      modelName: "e_assignment_attempts",
+    }
+  );
   return e_assignment_attempts;
 };
