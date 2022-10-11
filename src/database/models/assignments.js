@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ assignment_categories, score_types, e_assignment }) {
+    static associate({ assignment_categories, score_types, e_assignments }) {
       this.belongsTo(assignment_categories, {
         foreignKey: "assignmentCategoryId",
         as: "assignmentCategory",
@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "scoreTypeId",
         as: "scoreType",
       });
-      this.belongsTo(e_assignment, {
+      this.belongsTo(e_assignments, {
         foreignKey: "eAssignmentId",
         as: "eLearningAssignment",
       });

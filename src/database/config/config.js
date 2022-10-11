@@ -1,4 +1,4 @@
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 dotenv.config();
 
 const {
@@ -8,22 +8,18 @@ const {
   DATABASE_PASSWORD,
   DATABASE_HOST,
   DATABASE_PORT,
-  TEST_DATABASE_USER,
-  TEST_DATABASE_PASSWORD,
   TEST_DATABASE,
-  TEST_DATABASE_HOST,
-  TEST_DATABASE_PORT,
   TEST_GIT_ACTIONS,
 } = process.env;
 
 const dialectToggle = () => {
-  return TEST_GIT_ACTIONS == 'true'
+  return TEST_GIT_ACTIONS == "true"
     ? {
         ssl: {
           require: true,
           rejectUnauthorized: false,
-    },
-  }
+        },
+      }
     : {};
 };
 
@@ -34,17 +30,17 @@ module.exports = {
     database: DEV_DATABASE,
     host: DATABASE_HOST,
     port: DATABASE_PORT,
-    dialect: 'postgres',
+    dialect: "postgres",
   },
   test: {
-    username: TEST_DATABASE_USER,
-    password: TEST_DATABASE_PASSWORD,
+    username: DATABASE_USER,
+    password: DATABASE_PASSWORD,
     database: TEST_DATABASE,
-    host: TEST_DATABASE_HOST,
-    port: TEST_DATABASE_PORT,
-    dialect: 'postgres',
+    host: DATABASE_HOST,
+    port: DATABASE_PORT,
+    dialect: "postgres",
     logging: false,
-    protocol: 'postgres',
+    protocol: "postgres",
     dialectOptions: dialectToggle(),
   },
   production: {
@@ -54,8 +50,8 @@ module.exports = {
     host: DATABASE_HOST,
     port: DATABASE_PORT,
     logging: false,
-    protocol: 'postgres',
-    dialect: 'postgres',
+    protocol: "postgres",
+    dialect: "postgres",
     dialectOptions: {
       ssl: {
         require: true,

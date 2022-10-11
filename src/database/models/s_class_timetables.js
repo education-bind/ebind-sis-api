@@ -11,11 +11,11 @@ module.exports = (sequelize, DataTypes) => {
       edu_users,
       schools,
       edu_fac_acad_year_semisters,
-      school_classes,
+      s_classes,
     }) {
       this.belongsTo(edu_users, { foreignKey: "teacherId", as: "teacher" });
       this.belongsTo(schools, { foreignKey: "schoolId", as: "school" });
-      this.belongsTo(school_classes, {
+      this.belongsTo(s_classes, {
         foreignKey: "schoolClassId",
         as: "schoolClass",
       });

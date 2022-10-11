@@ -2,20 +2,19 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
-import { serve, setup } from 'swagger-ui-express';
-import swaggerSpecs from '../public/api-docs/swagger.json';
+import helmet from "helmet";
 import globalErrorHandler from "./controllers/errorController";
 import AppError from "./utils/appError";
-import helmet from "helmet";
+import messages from "./utils/customMessages";
+import statusCode from "./utils/statusCodes";
 import compression from "compression";
 import allRoutes from "./routers";
 
+const { endpointNotFound } = messages;
+const { notFound } = statusCode;
+
 const app = express();
-const docRouter = express.Router();
 
-docRouter.use('/api-docs', serve, setup(swaggerSpecs));
-
-app.use(docRouter);
 app.use(cors());
 app.enable("trust proxy");
 
@@ -42,10 +41,8 @@ app.use(express.static(`${__dirname}/public`));
 
 app.use(allRoutes);
 
-app.all("*", (req, _, next) => {
-  next(
-    new AppError(`Opps! can't find "${req.originalUrl}" on this server!`, 404)
-  );
+app.all("*", (_req, _, next) => {
+  next(new AppError(endpointNotFound, notFound));
 });
 
 app.use(globalErrorHandler);
