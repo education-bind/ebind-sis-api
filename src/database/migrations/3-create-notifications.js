@@ -1,0 +1,58 @@
+'use strict';
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('notifications', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'edu_users',
+          key: 'id',
+        },
+        onDelete: 'RESTRICT',
+        onUpdate: 'CASCADE',
+      },
+      title: {
+        type: Sequelize.STRING
+      },
+      isRead: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      link: {
+        type: Sequelize.TEXT
+      },
+      notificationTypeId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'notification_types',
+          key: 'id',
+        },
+        onDelete: 'RESTRICT',
+        onUpdate: 'CASCADE',
+      },
+      message: {
+        type: Sequelize.TEXT
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
+    });
+  },
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('notifications');
+  }
+};
