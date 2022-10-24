@@ -8,16 +8,15 @@ import credentials from "../config/authorizationConfig.test.js";
 
 const { noContent, contentDeleted } = messages;
 const { ok, notFound, badRequest, created } = statusCode;
-const { countryExist, validCountry, invalidCountry, updateCountry } =
-  mockData.countryData;
+const { createLanguage, updateLanguage } = mockData.eduLanguages;
 
 chai.use(chaiHttp);
 const api = chai.request(server).keepOpen();
 const { expect } = chai;
 
-describe("Countries", () => {
-  it("Should return 200 status with all available countries", (done) => {
-    api.get("/api/v1/edu/countries").end((err, res) => {
+describe("Education bind languages", () => {
+  it("Should return 200 status with all available languages", (done) => {
+    api.get("/api/v1/edu/languages").end((err, res) => {
       const { status } = res.body;
       expect(res.status).to.equal(ok);
       expect(status).to.equal("success");
@@ -25,8 +24,8 @@ describe("Countries", () => {
     });
   });
 
-  it("Should return 200 if a country with id exist", (done) => {
-    api.get("/api/v1/edu/countries/1").end((err, res) => {
+  it("Should return 200 if a language with id exist", (done) => {
+    api.get("/api/v1/edu/languages/1").end((err, res) => {
       const { status } = res.body;
       expect(res.status).to.equal(ok);
       expect(status).to.equal("success");
@@ -34,8 +33,8 @@ describe("Countries", () => {
     });
   });
 
-  it("Should return 404 if a country with id doesn't exist", (done) => {
-    api.get("/api/v1/edu/countries/2").end((err, res) => {
+  it("Should return 404 if a language with id doesn't exist", (done) => {
+    api.get("/api/v1/edu/languages/2").end((err, res) => {
       const { message } = res.body;
       expect(res.status).to.equal(notFound);
       expect(message).to.equal(noContent);
@@ -43,14 +42,14 @@ describe("Countries", () => {
     });
   });
 
-  it("Should return 400 if a country you try to create has invalid data", (done) => {
+  it("Should return 400 if  you try to create language with no name", (done) => {
     api
-      .post("/api/v1/edu/countries")
+      .post("/api/v1/edu/languages")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
       )
-      .send(invalidCountry)
+      .send({})
       .end((err, res) => {
         const { data } = res.body;
         expect(res.status).to.equal(badRequest);
@@ -59,29 +58,14 @@ describe("Countries", () => {
       });
   });
 
-  it("Should return 400 if a country already exist", (done) => {
+  it("Should return 201 if a language was created successfully", (done) => {
     api
-      .post("/api/v1/edu/countries")
+      .post("/api/v1/edu/languages")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
       )
-      .send(countryExist)
-      .end((err, res) => {
-        const { data } = res.body;
-        expect(res.status).to.equal(badRequest);
-        expect(data);
-        done();
-      });
-  });
-  it("Should return 201 if a country was created successfully", (done) => {
-    api
-      .post("/api/v1/edu/countries")
-      .set(
-        "Authorization",
-        `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
-      )
-      .send(validCountry)
+      .send(createLanguage)
       .end((err, res) => {
         const { data } = res.body;
         expect(res.status).to.equal(created);
@@ -90,30 +74,14 @@ describe("Countries", () => {
       });
   });
 
-  it("Should return 400 if a country you try to update has invalid data", (done) => {
+  it("Should return 404 if a language you try to update doesn't exist", (done) => {
     api
-      .patch("/api/v1/edu/countries/1")
-      .send(invalidCountry)
+      .patch("/api/v1/edu/languages/999")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
       )
-      .end((err, res) => {
-        const { data } = res.body;
-        expect(res.status).to.equal(badRequest);
-        expect(data);
-        done();
-      });
-  });
-
-  it("Should return 404 if a country you try to update doesn't exist", (done) => {
-    api
-      .patch("/api/v1/edu/countries/999")
-      .set(
-        "Authorization",
-        `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
-      )
-      .send(updateCountry)
+      .send(updateLanguage)
       .end((err, res) => {
         const { data } = res.body;
         expect(res.status).to.equal(notFound);
@@ -122,14 +90,14 @@ describe("Countries", () => {
       });
   });
 
-  it("Should return 200 if a country was updated successfully", (done) => {
+  it("Should return 200 if a language was updated successfully", (done) => {
     api
-      .patch("/api/v1/edu/countries/1")
+      .patch("/api/v1/edu/languages/1")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
       )
-      .send(updateCountry)
+      .send(updateLanguage)
       .end((err, res) => {
         const { data } = res.body;
         expect(res.status).to.equal(ok);
@@ -137,9 +105,9 @@ describe("Countries", () => {
         done();
       });
   });
-  it("Should return 200 if a country was deleted successfully", (done) => {
+  it("Should return 200 if a language was deleted successfully", (done) => {
     api
-      .delete("/api/v1/edu/countries/1")
+      .delete("/api/v1/edu/languages/1")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`

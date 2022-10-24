@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class edu_admin_user_infos extends Model {
     /**
@@ -10,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate({ edu_users }) {
-      this.belongsTo(edu_users, { foreignKey: 'userId', as: 'user' });
+      this.belongsTo(edu_users, { foreignKey: "userId", as: "user" });
     }
     toJSON() {
       return {
@@ -18,14 +16,18 @@ module.exports = (sequelize, DataTypes) => {
       };
     }
   }
-  edu_admin_user_infos.init({
-    identityNumber: DataTypes.STRING,
-    identityNumberType: DataTypes.STRING,
-    isVerfied: DataTypes.BOOLEAN,
-    verificationToken: DataTypes.TEXT
-  }, {
-    sequelize,
-    modelName: 'edu_admin_user_infos',
-  });
+  edu_admin_user_infos.init(
+    {
+      identityNumber: DataTypes.STRING,
+      role: DataTypes.STRING,
+      identityNumberType: DataTypes.STRING,
+      isVerified: DataTypes.BOOLEAN,
+      verificationToken: DataTypes.TEXT,
+    },
+    {
+      sequelize,
+      modelName: "edu_admin_user_infos",
+    }
+  );
   return edu_admin_user_infos;
 };

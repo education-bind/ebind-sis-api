@@ -1,5 +1,10 @@
 "use strict";
 
+import logger from "../../utils/logger";
+
+const dotenv = require("dotenv");
+dotenv.config();
+
 const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize");
@@ -8,7 +13,6 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "/../config/config.js")[env];
 const db = {};
-console.log(env);
 
 let sequelize;
 if (config.use_env_variable) {
@@ -21,6 +25,20 @@ if (config.use_env_variable) {
     config
   );
 }
+
+(async () => {
+  try {
+    await sequelize.authenticate();
+    logger.success(
+      `${process.env.NODE_ENV.replace(
+        process.env.NODE_ENV[0],
+        process.env.NODE_ENV[0].toUpperCase()
+      )} database connection has been established successfully...`
+    );
+  } catch (error) {
+    logger.error("Unable to connect to the database:" + error);
+  }
+})();
 
 fs.readdirSync(__dirname)
   .filter((file) => {

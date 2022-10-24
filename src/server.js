@@ -1,8 +1,9 @@
 import "dotenv/config";
+import logger from "./utils/logger";
 import open from "open";
 
 process.on("uncaughtException", (err) => {
-  console.log("UNCAUGHT EXCEPTION! 💥 Shutting down...");
+  logger.error("UNCAUGHT EXCEPTION! 💥 Shutting down...");
   console.log(err.name, err.message);
   process.exit(1);
 });
@@ -11,7 +12,9 @@ import app from "./app";
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
-  console.log(`App running on port ${port}...`);
+  if (process.send) {
+    process.send(`Server running at http://localhost:${port}\n\n`);
+  }
 });
 
 /* if (process.env.NODE_ENV === "development") {
@@ -19,7 +22,7 @@ const server = app.listen(port, () => {
 } */
 
 process.on("unhandledRejection", (err) => {
-  console.log("UNHANDLED REJECTION! 💥 Shutting down...");
+  logger.error("UNHANDLED REJECTION! 💥 Shutting down...");
   console.log(err.name, err.message);
   server.close(() => {
     process.exit(1);
@@ -27,8 +30,12 @@ process.on("unhandledRejection", (err) => {
 });
 
 process.on("SIGTERM", () => {
-  console.log("👋 SIGTERM RECEIVED. Shutting down gracefully");
+  logger.warn("👋 SIGTERM RECEIVED. Shutting down gracefully");
   server.close(() => {
-    console.log("💥 Process terminated!");
+    logger.error("💥 Process terminated!");
   });
+});
+
+process.on("message", (message) => {
+  console.log(message);
 });

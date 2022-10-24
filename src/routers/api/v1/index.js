@@ -1,11 +1,11 @@
 import express from "express";
-import countries from "./countries";
+import { getAccessToken } from "../../../controllers/authentication.controller";
+import { verifyRefleshToken } from "../../../middlewares/authentication";
+import ebind from "./ebind";
 
 const apiRouter = express.Router();
 
-apiRouter.get("/", (_, res) => {
-  res.json({ message: "API VERSION 1" });
-});
-apiRouter.use("/countries", countries);
+apiRouter.post("/refreshToken", verifyRefleshToken, getAccessToken);
+apiRouter.use("/edu", ebind);
 
 export default apiRouter;

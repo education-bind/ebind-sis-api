@@ -7,15 +7,16 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "NODE_ENV=production node --exec babel-node ./src/server.js",
-    "start:prod": "NODE_ENV=production nodemon --exec babel-node ./src/server.js",
-    "start:dev": "NODE_ENV=development nodemon --exec babel-node ./src/server.js",
-    "migrate": "NODE_ENV=development npx sequelize-cli db:migrate",
-    "down": "NODE_ENV=development npx sequelize-cli db:migrate:undo:all",
-    "seed": "NODE_ENV=development npx sequelize-cli db:seed:all",
-    "undo-seed": "NODE_ENV=development npx sequelize-cli db:seed:undo",
-    "test": "NODE_ENV=test  npm run down && npm run migrate && npm run seed && mocha --timeout 30000 --exit",
-    "coverage": "NODE_ENV=test nyc npm run test | coveralls"
+    "start": "node --exec babel-node ./src/server.js",
+    "start:prod": "nodemon --exec babel-node ./src/server.js",
+    "start:dev": "nodemon --exec babel-node ./src/server.js",
+    "migrate": "npx sequelize-cli db:migrate",
+    "down": "npx sequelize-cli db:migrate:undo:all",
+    "seed": "npx sequelize-cli db:seed:all",
+    "undo-seed": "npx sequelize-cli db:seed:undo",
+    "test": "npm run down && npm run migrate && npm run seed && nyc mocha --require @babel/register ./tests/**/*.js --timeout 30000 --exit",
+    "coverage": "nyc npm run test | coveralls",
+    "build": "npm run down && npm run migrate && npm run seed && npm run start:prod"
   },
   "repository": {
     "type": "git",
@@ -73,6 +74,10 @@
     "babel-eslint": "^10.1.0",
     "babel-node": "^0.0.1-security",
     "babel-register": "^6.26.0",
+    "bcryptjs": "^2.4.3",
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
+    "chalk": "^4.1.2",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -80,28 +85,21 @@
     "express": "^4.18.1",
     "helmet": "^6.0.0",
     "joi": "^17.6.2",
+    "jsonwebtoken": "^8.5.1",
     "open": "^8.4.0",
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
+    "redis": "^4.3.1",
     "sequelize": "^6.23.2",
     "swagger-ui-express": "^4.5.0"
   },
   "nyc": {
-    "all": true,
-    "include": [
-      "src/**/*.js",
-      "test/*.test.js"
-    ],
-    "reporter": [
-      "html",
-      "text",
-      "text-lcov"
-    ],
+    "sourceMap": false,
+    "instrument": false,
     "exclude": [
-      "node_modules/*",
-      "src/database/seeders/*",
-      "src/index.js",
-      "coverage/*"
+      "src/app.js",
+      "src/controllers/errorController.js",
+      "tests/mockData/*"
     ]
   }
 }

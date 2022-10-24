@@ -8,7 +8,7 @@ export const successResponse = (res, code, data) =>
     data,
   });
 
-export const deleteResponse = (message) =>
+export const deleteResponse = (res, message) =>
   res.status(ok).json({
     status: "success",
     message,
