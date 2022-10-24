@@ -52,7 +52,6 @@ describe("Countries", () => {
       )
       .send(invalidCountry)
       .end((err, res) => {
-        console.log(res.body)
         const { data } = res.body;
         expect(res.status).to.equal(badRequest);
         expect(data);
