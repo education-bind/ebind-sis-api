@@ -19,7 +19,7 @@ module.exports = {
           model: "assignment_categories",
           key: "id",
         },
-        onDelete: "RESTRICT",
+        onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
       scoreEntryPoints: {
@@ -32,7 +32,7 @@ module.exports = {
           model: "score_types",
           key: "id",
         },
-        onDelete: "RESTRICT",
+        onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
       description: {
@@ -63,7 +63,7 @@ module.exports = {
           model: "e_assignments",
           key: "id",
         },
-        onDelete: "RESTRICT",
+        onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
       createdAt: {

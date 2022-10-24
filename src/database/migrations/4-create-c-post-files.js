@@ -16,7 +16,7 @@ module.exports = {
           model: 'c_posts',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       file: {

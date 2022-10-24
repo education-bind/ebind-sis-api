@@ -16,7 +16,7 @@ module.exports = {
           model: 's_classes',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       assignmentId: {
@@ -26,7 +26,7 @@ module.exports = {
           model: 'assignments',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       eduFacAcadYearSemId: {
@@ -36,7 +36,7 @@ module.exports = {
           model: 'edu_fac_acad_year_semisters',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       assignmentDueDate: {

@@ -16,7 +16,7 @@ module.exports = {
           model: 'e_questions',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       answer: {

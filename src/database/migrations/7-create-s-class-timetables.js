@@ -16,7 +16,7 @@ module.exports = {
           model: 's_classes',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       schoolId: {
@@ -25,10 +25,10 @@ module.exports = {
         references: {
           model: 'schools',
           key: 'id',
-          onDelete: 'RESTRICT',
+          onDelete: 'CASCADE',
           onUpdate: 'CASCADE',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       startTime: {
@@ -47,7 +47,7 @@ module.exports = {
           model: 'edu_users',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       moduleId: {

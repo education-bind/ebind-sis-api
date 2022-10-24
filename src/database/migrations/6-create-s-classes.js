@@ -16,7 +16,7 @@ module.exports = {
           model: 'schools',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       representerId: {
@@ -26,7 +26,7 @@ module.exports = {
           model: 'edu_users',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       eduFacultyClassId: {
@@ -36,7 +36,7 @@ module.exports = {
           model: 'edu_fac_classes',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       name: {
@@ -52,7 +52,7 @@ module.exports = {
           model: 'edu_fac_acad_years',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       active: {

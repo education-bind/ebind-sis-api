@@ -16,7 +16,7 @@ module.exports = {
           model: "countries",
           key: "id",
         },
-        onDelete: "RESTRICT",
+        onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
       name: {

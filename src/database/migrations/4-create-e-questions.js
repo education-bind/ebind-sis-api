@@ -16,7 +16,7 @@ module.exports = {
           model: 'e_assignments',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       question: {

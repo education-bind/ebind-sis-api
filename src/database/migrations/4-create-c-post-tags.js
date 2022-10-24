@@ -16,7 +16,7 @@ module.exports = {
           model: 'c_tags',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       cPostId: {
@@ -26,7 +26,7 @@ module.exports = {
           model: 'c_posts',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       createdAt: {

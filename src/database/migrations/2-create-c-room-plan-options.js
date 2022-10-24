@@ -16,7 +16,7 @@ module.exports = {
           model: 'c_room_plans',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       name: {
