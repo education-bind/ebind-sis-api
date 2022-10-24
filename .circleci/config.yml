@@ -46,7 +46,10 @@ jobs:
 workflows:
   build:
     jobs:
-      - run-tests
+      - build
+      - run-tests:
+          requires:
+            - build
       - build_docker_image:
           requires:
             - run-tests
