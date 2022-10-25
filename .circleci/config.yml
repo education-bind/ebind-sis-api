@@ -18,15 +18,16 @@ jobs:
       - attach_workspace:
           at: .
       - checkout
-      - run: npm run test
+      - run:
+          name: Run tests
+          command: npm run test
+      - run:
+          name: Run test coverage
+          command: npm run coverage
       - persist_to_workspace:
           root: .
           paths:
             - .
-      - store_test_results:
-          path: test-results
-      - store_artifacts:
-          path: test-results
   build_docker_image:
     machine:
       image: ubuntu-2004:202101-01

@@ -2,4 +2,4 @@
 
 ## Badges
 
-[![Coverage Status](https://coveralls.io/repos/github/education-bind/ebind-backend/badge.svg?branch=development)](https://coveralls.io/github/education-bind/ebind-backend?branch=development)
+[![Coverage Status](https://coveralls.io/repos/github/education-bind/ebind-backend/badge.svg)](https://coveralls.io/github/education-bind/ebind-backend)
