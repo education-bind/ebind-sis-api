@@ -4,7 +4,6 @@ import server from "../../src/app.js";
 import statusCode from "../../src/utils/statusCodes";
 import { eBindSuperAdmin } from "../mockData/usersMockData.js";
 import mockData from "../mockData/mockData.js";
-import credentials from "../config/authorizationConfig.test.js";
 
 const { ok, unAuthorized } = statusCode;
 mockData.countryData;
@@ -43,7 +42,6 @@ describe("Authentication", () => {
       .post("/api/v1/refreshToken")
       .send({ token: refreshToken })
       .end((err, res) => {
-        console.log(refreshToken, 'dynamite:', res.body,)
         const { data } = res.body;
         expect(res.status).to.equal(ok);
         expect(data);
