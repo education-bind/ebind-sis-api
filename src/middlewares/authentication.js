@@ -36,6 +36,7 @@ export const verifyToken = catchAsync(async (req, res, next) => {
 
   const tokenData = await getToken(`BL_${accessToken.sub.toString()}`);
 
+  console.log(`Access token: ${tokenData} \n tokenData: ${JSON.stringify({ accessToken })}`);
   if (tokenData === JSON.stringify({ accessToken }))
     return next(new AppError(accessTokenInvalid, unAuthorized));
 
