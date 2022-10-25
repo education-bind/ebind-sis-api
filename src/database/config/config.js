@@ -15,11 +15,11 @@ const {
 const dialectToggle = () => {
   return TEST_GIT_ACTIONS == "true"
     ? {
-        ssl: {
-          require: true,
-          rejectUnauthorized: false,
-        },
-      }
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    }
     : {};
 };
 
@@ -52,11 +52,11 @@ module.exports = {
     logging: false,
     protocol: "postgres",
     dialect: "postgres",
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-    },
+    /*     dialectOptions: {
+          ssl: {
+            require: true,
+            rejectUnauthorized: false,
+          },
+        }, */
   },
 };

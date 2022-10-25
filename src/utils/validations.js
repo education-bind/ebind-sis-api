@@ -5,7 +5,7 @@ import statusCode from "../utils/statusCodes";
 import messages from "../utils/customMessages";
 
 const { badRequest } = statusCode;
-const {} = messages;
+const { } = messages;
 
 export const validateCountry = catchAsync(async (req, res, next) => {
   const data = {

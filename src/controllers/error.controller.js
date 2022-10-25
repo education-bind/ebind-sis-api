@@ -28,7 +28,7 @@ export const sendErrorProd = (err, req, res) => {
     });
   }
 
-  logger.error(`ERROR 💥 \n ${err}`);
+  logger.error(`ERROR 💥 \n`, err);
 
   return res.status(serverError).json({
     status: "error",
