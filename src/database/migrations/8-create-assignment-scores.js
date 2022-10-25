@@ -16,7 +16,7 @@ module.exports = {
           model: "s_classes",
           key: "id",
         },
-        onDelete: "RESTRICT",
+        onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
       studentId: {
@@ -26,7 +26,7 @@ module.exports = {
           model: "edu_users",
           key: "id",
         },
-        onDelete: "RESTRICT",
+        onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
       assignmentId: {
@@ -36,7 +36,7 @@ module.exports = {
           model: "assignments",
           key: "id",
         },
-        onDelete: "RESTRICT",
+        onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
       takeAssignment: {
@@ -55,7 +55,7 @@ module.exports = {
           model: "score_flags",
           key: "id",
         },
-        onDelete: "RESTRICT",
+        onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
       isMarked: {
@@ -69,7 +69,7 @@ module.exports = {
           model: "score_types",
           key: "id",
         },
-        onDelete: "RESTRICT",
+        onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
       active: {

@@ -19,7 +19,7 @@ module.exports = {
           model: 'schools',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       eduPermissionId: {
@@ -29,7 +29,7 @@ module.exports = {
           model: 'edu_permissions',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       active: {

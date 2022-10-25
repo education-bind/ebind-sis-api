@@ -16,7 +16,7 @@ module.exports = {
           model: 'edu_users',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       cRoomTypeId: {
@@ -26,7 +26,7 @@ module.exports = {
           model: 'c_room_types',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       name: {
@@ -39,7 +39,7 @@ module.exports = {
           model: 'countries',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       active: {

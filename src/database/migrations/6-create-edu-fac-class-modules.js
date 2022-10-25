@@ -16,7 +16,7 @@ module.exports = {
           model: 'edu_faculties',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       eduFacClassId: {
@@ -26,7 +26,7 @@ module.exports = {
           model: 'edu_fac_classes',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       name: {

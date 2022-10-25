@@ -1,9 +1,9 @@
 import chalk from "chalk";
 
 class Logger {
-  log(message = "") {
+  log(message = "", error = "") {
     if (message) {
-      console.log(`${message}`);
+      console.log(`${message}`, error);
     }
   }
 
@@ -19,8 +19,8 @@ class Logger {
     this.log(chalk.yellow(message));
   }
 
-  error(error) {
-    this.log(chalk.red(error));
+  error(message, error) {
+    this.log(chalk.red(message), error);
   }
 }
 

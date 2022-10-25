@@ -16,7 +16,7 @@ module.exports = {
           model: "edu_users",
           key: "id",
         },
-        onDelete: "RESTRICT",
+        onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
       schoolId: {
@@ -26,7 +26,7 @@ module.exports = {
           model: "schools",
           key: "id",
         },
-        onDelete: "RESTRICT",
+        onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
       eduFacAcadYearSemId: {
@@ -36,7 +36,7 @@ module.exports = {
           model: "edu_fac_acad_year_semisters",
           key: "id",
         },
-        onDelete: "RESTRICT",
+        onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
       schoolClassTimetableId: {
@@ -46,7 +46,7 @@ module.exports = {
           model: "s_class_timetables",
           key: "id",
         },
-        onDelete: "RESTRICT",
+        onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
       status: {

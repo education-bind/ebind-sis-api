@@ -16,7 +16,7 @@ module.exports = {
           model: 'edu_user_types',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       communityCountryId: {
@@ -26,7 +26,7 @@ module.exports = {
           model: 'countries',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       firstName: Sequelize.STRING,

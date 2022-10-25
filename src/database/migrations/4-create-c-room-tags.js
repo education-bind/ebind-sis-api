@@ -16,7 +16,7 @@ module.exports = {
           model: 'c_tags',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       cRoomId: {
@@ -26,7 +26,7 @@ module.exports = {
           model: 'c_rooms',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       createdAt: {

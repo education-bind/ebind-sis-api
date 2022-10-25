@@ -16,7 +16,7 @@ module.exports = {
           model: "edu_users",
           key: "id",
         },
-        onDelete: "RESTRICT",
+        onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
       eAssignmentId: {
@@ -26,7 +26,7 @@ module.exports = {
           model: "e_assignments",
           key: "id",
         },
-        onDelete: "RESTRICT",
+        onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
       attemptId: {
@@ -36,7 +36,7 @@ module.exports = {
           model: "e_assignment_attempts",
           key: "id",
         },
-        onDelete: "RESTRICT",
+        onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
       score: {

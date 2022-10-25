@@ -16,7 +16,7 @@ module.exports = {
           model: 'edu_users',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       studentId: {
@@ -26,7 +26,7 @@ module.exports = {
           model: 'edu_users',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       guardianRelationshipId: {
@@ -36,7 +36,7 @@ module.exports = {
           model: 'guardian_relationships',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       liveWith: {

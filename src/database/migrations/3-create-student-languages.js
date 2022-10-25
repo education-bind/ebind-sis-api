@@ -16,7 +16,7 @@ module.exports = {
           model: 'edu_users',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       eduLanguageId: {
@@ -26,7 +26,7 @@ module.exports = {
           model: 'edu_languages',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       type: {

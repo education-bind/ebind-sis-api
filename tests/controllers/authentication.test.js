@@ -4,7 +4,6 @@ import server from "../../src/app.js";
 import statusCode from "../../src/utils/statusCodes";
 import { eBindSuperAdmin } from "../mockData/usersMockData.js";
 import mockData from "../mockData/mockData.js";
-import credentials from "../config/authorizationConfig.test.js";
 
 const { ok, unAuthorized } = statusCode;
 mockData.countryData;
@@ -15,6 +14,7 @@ const { expect } = chai;
 
 describe("Authentication", () => {
   let loginToken;
+  let refreshToken;
 
   it("Should return 401 status if refresh token is missing", (done) => {
     api.post("/api/v1/refreshToken").end((err, res) => {
@@ -24,17 +24,7 @@ describe("Authentication", () => {
       done();
     });
   });
-  it("Should return 200 status if Request for refresh token was successful", (done) => {
-    api
-      .post("/api/v1/refreshToken")
-      .send({ token: credentials.eBindSuperAdminToken.refreshToken })
-      .end((err, res) => {
-        const { data } = res.body;
-        expect(res.status).to.equal(ok);
-        expect(data);
-        done();
-      });
-  });
+
   it("Should return 200 status if Login was successful", (done) => {
     api
       .post("/api/v1/edu/auth/login")
@@ -42,6 +32,19 @@ describe("Authentication", () => {
       .end((err, res) => {
         const { data } = res.body;
         loginToken = data.tokens.accessToken;
+        refreshToken = data.tokens.refreshToken;
+        done();
+      });
+  });
+
+  it("Should return 200 status if Request for refresh token was successful", (done) => {
+    api
+      .post("/api/v1/refreshToken")
+      .send({ token: refreshToken })
+      .end((err, res) => {
+        const { data } = res.body;
+        expect(res.status).to.equal(ok);
+        expect(data);
         done();
       });
   });

@@ -16,7 +16,7 @@ module.exports = {
           model: 'e_course_sections',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       title: {

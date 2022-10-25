@@ -16,7 +16,7 @@ module.exports = {
           model: 'schools',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       image: {

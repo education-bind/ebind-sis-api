@@ -16,7 +16,7 @@ module.exports = {
           model: 'edu_users',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       eCourseId: {
@@ -26,7 +26,7 @@ module.exports = {
           model: 'e_courses',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       eCourseSectionType: {
@@ -39,7 +39,7 @@ module.exports = {
           model: 'e_course_sections',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       active: {

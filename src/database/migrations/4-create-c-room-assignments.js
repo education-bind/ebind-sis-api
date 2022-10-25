@@ -19,7 +19,7 @@ module.exports = {
           model: 'c_rooms',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       eAssignmentId: {
@@ -29,7 +29,7 @@ module.exports = {
           model: 'e_assignments',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       scoreTypeId: {
@@ -39,7 +39,7 @@ module.exports = {
           model: 'score_types',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       scoreEntryPoints: {

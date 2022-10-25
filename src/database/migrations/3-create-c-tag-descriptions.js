@@ -16,7 +16,7 @@ module.exports = {
           model: 'c_tags',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       userId: {
@@ -26,7 +26,7 @@ module.exports = {
           model: 'edu_users',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       description: {

@@ -2,45 +2,31 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('edu_fac_acad_years', {
+    await queryInterface.createTable('edu_fac_classes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      eduFacultyId: {
+      eduFacultyClassGroupId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'edu_faculties',
+          model: 'edu_fac_class_groups',
           key: 'id',
         },
-        onDelete: 'RESTRICT',
-        onUpdate: 'CASCADE',
-      },
-      eduFacClassId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'edu_fac_classes',
-          key: 'id',
-        },
-        onDelete: 'RESTRICT',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
       name: {
         type: Sequelize.STRING
       },
-      startDate: {
-        type: Sequelize.DATE
+      abbreviation: {
+        type: Sequelize.STRING
       },
-      endDate: {
-        type: Sequelize.DATE
-      },
-      isValid: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: true
+      description: {
+        type: Sequelize.TEXT
       },
       active: {
         type: Sequelize.BOOLEAN,
@@ -57,6 +43,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('edu_fac_acad_years');
+    await queryInterface.dropTable('edu_fac_classes');
   }
 };

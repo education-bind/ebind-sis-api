@@ -10,7 +10,7 @@ export const handleSequelizeUniqueConstraintError = (err) => {
   err.errors.map((er) => {
     errObj[er.path] = er.message;
   });
-  return new AppError(errObj.name, badRequest);
+  return new AppError(errObj.code ? errObj.code : errObj.name, badRequest);
 };
 
 export const handleJWTError = () => new AppError(JWTError, unAuthorized);

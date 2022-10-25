@@ -28,7 +28,7 @@ export const sendErrorProd = (err, req, res) => {
     });
   }
 
-  logger.error(`ERROR 💥 \n ${err}`);
+  logger.error(`ERROR 💥 \n`, err);
 
   return res.status(serverError).json({
     status: "error",
@@ -48,6 +48,7 @@ export default (err, req, res, next) => {
   ) {
     let error = { ...err };
     error.message = err.message;
+    console.log(err)
 
     if (err.name === "SequelizeUniqueConstraintError")
       error = handleSequelizeUniqueConstraintError(err);

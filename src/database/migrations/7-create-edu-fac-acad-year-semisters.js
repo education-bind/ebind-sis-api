@@ -16,7 +16,7 @@ module.exports = {
           model: "edu_fac_acad_years",
           key: "id",
         },
-        onDelete: "RESTRICT",
+        onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
       name: {
