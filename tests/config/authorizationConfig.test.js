@@ -22,7 +22,6 @@ describe("Tests Authorization", () => {
       .end((err, res) => {
         const { status, data } = res.body;
         credentials.eBindSuperAdminToken = data.tokens;
-        console.log('access token: ' + credentials.eBindSuperAdminToken)
         expect(res.status).to.equal(ok);
         expect(status).to.equal("success");
         expect(data);
