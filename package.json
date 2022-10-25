@@ -15,7 +15,7 @@
     "seed": "npx sequelize-cli db:seed:all",
     "undo-seed": "npx sequelize-cli db:seed:undo",
     "test": "npm run down && npm run migrate && npm run seed && nyc mocha --require @babel/register ./tests/**/*.js --timeout 30000 --exit",
-    "coverage": "nyc npm run test | coveralls",
+    "coverage": "nyc report --reporter=text-lcov",
     "build": "npm run down && npm run migrate && npm run seed && npm run start:prod"
   },
   "repository": {
