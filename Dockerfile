@@ -9,7 +9,7 @@ ENV NODE_ENV=production
 USER node
 WORKDIR /app
 
-COPY --from=build ./app .
+COPY --from=builder ./app .
 
 EXPOSE 3000
 
