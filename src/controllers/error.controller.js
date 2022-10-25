@@ -48,6 +48,7 @@ export default (err, req, res, next) => {
   ) {
     let error = { ...err };
     error.message = err.message;
+    console.log(err)
 
     if (err.name === "SequelizeUniqueConstraintError")
       error = handleSequelizeUniqueConstraintError(err);
