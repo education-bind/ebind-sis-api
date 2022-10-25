@@ -1,0 +1,123 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ebind-server-secret
+type: Opaque
+data:
+  database-user: ZWJpbmQ=
+  database-password: cERkRzB2bzg4MXBIaG84alpDQlhHM0ptWjlNY20yV0Y=
+  database-host: ZHBnLWNkNHB1N3VuNm1wbm9na2sxNDAwLWEub3JlZ29uLXBvc3RncmVzLnJlbmRlci5jb20=
+  database-port: NTQzMg==
+  production-database: ZWJpbmRfcHJvZA==
+  dev-database: ZWJpbmRfZGV2
+  test-database: ZWJpbmRfdGVzdA==
+  node-env: cHJvZHVjdGlvbg==
+  test-git-actions: ZmFsc2U=
+  jwt-access-secret: ZjU2NjNkNWU4MTNlOTNhOTc4ZDhhZmEwMWE0ZGVhNDkxMDdkY2RmMTFmMTY4NjBmM2E2NzkwZjg5NTU0YmNjZTFlODEzOWViMTE3OGQyZGZkMzlkNzFlMGEzYTcwMzBlOTdmZWNjZmJiNGE1MDQ5NDcxZGQ4ZjUzMDRlMWQ1MGU=
+  jwt-refresh-secret: MWFjMWRkNjk1ZDA3MzM1M2U2ZWFiN2NhMGFmNmUwYmIzYTE3ODVlNDZjODkxZWU4ZjU1NGRkMzZmMmVkZTllOWZmOTQ0ZTFiODA1YWYxMWJkODI0MjY4MDk3NjcyODdkNzYzMzRiNGQ5MmMxNWUxODY0MjFjMTQ3MTgxYTZjN2M=
+  jwt-access-time: MzAwcw==
+  redis-url: cmVkaXM6Ly9yZWRpcy0xODI0NC5jMjYyLnVzLWVhc3QtMS0zLmVjMi5jbG91ZC5yZWRpc2xhYnMuY29tOjE4MjQ0
+  redis-pwd: YWh0bDBJYkpYZkpCQlY5bjRDc0N5VGtuV2ptV3JuMmk=
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ebind-server-pod
+  labels:
+    app: ebind-server
+spec:
+  containers:
+    - name: ebind-server
+      image: uwambajeddy/ebind-node-server:latest
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      ports:
+        - containerPort: 6379
+      env:
+        - name: DATABASE_USER
+          valueFrom:
+            secretKeyRef:
+              name: ebind-server-secret
+              key: database-user
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ebind-server-secret
+              key: database-password
+        - name: DATABASE_HOST
+          valueFrom:
+            secretKeyRef:
+              name: ebind-server-secret
+              key: database-host
+        - name: DATABASE_PORT
+          valueFrom:
+            secretKeyRef:
+              name: ebind-server-secret
+              key: database-port
+        - name: PRODUCTION_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: ebind-server-secret
+              key: production-database
+        - name: DEV_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: ebind-server-secret
+              key: dev-database
+        - name: TEST_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: ebind-server-secret
+              key: test-database
+        - name: NODE_ENV
+          valueFrom:
+            secretKeyRef:
+              name: ebind-server-secret
+              key: node-env
+        - name: TEST_GIT_ACTIONS
+          valueFrom:
+            secretKeyRef:
+              name: ebind-server-secret
+              key: test-git-actions
+        - name: JWT_ACCESS_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: ebind-server-secret
+              key: jwt-access-secret
+        - name: JWT_REFRESH_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: ebind-server-secret
+              key: jwt-refresh-secret
+        - name: JWT_ACCESS_TIME
+          valueFrom:
+            secretKeyRef:
+              name: ebind-server-secret
+              key: jwt-access-time
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: ebind-server-secret
+              key: redis-url
+        - name: REDIS_PWD
+          valueFrom:
+            secretKeyRef:
+              name: ebind-server-secret
+              key: redis-pwd
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ebind-node-port
+spec:
+  type: NodePort
+  ports:
+    - port: 3050
+      targetPort: 3000
+      nodePort: 30055
+  selector:
+    app: ebind-server
