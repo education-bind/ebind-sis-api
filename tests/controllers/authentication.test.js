@@ -46,17 +46,17 @@ describe("Authentication", () => {
       });
   });
 
-  it("Should return 200 status if Logout was successful", (done) => {
-    api
-      .get("/api/v1/edu/auth/logout")
-      .set("Authorization", `Bearer ${loginToken}`)
-      .end((err, res) => {
-        const { message } = res.body;
-        expect(res.status).to.equal(ok);
-        expect(message);
-        done();
-      });
-  });
+  /*   it("Should return 200 status if Logout was successful", (done) => {
+      api
+        .get("/api/v1/edu/auth/logout")
+        .set("Authorization", `Bearer ${loginToken}`)
+        .end((err, res) => {
+          const { message } = res.body;
+          expect(res.status).to.equal(ok);
+          expect(message);
+          done();
+        });
+    }); */
 
   it("Should return 401 status if access token is missing", (done) => {
     api.get("/api/v1/edu/auth/logout").end((err, res) => {
