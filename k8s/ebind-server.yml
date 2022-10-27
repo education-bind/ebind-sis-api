@@ -29,7 +29,7 @@ metadata:
 spec:
   containers:
     - name: ebind-server
-      image: uwambajeddy/ebind-node-server:latest
+      image: hello-word
       resources:
         limits:
           memory: "128Mi"

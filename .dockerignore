@@ -2,3 +2,7 @@
 Dockerfile
 .dockerignore
 docker-compose.yml
+.nyc_output
+.circleci
+.coveralls.yml
+.tests
