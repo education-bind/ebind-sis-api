@@ -70,13 +70,13 @@ describe("Authentication", () => {
     });
   });
 
-  it("Should return 401 status if you Logout with expired token", (done) => {
+  it("Should return 200 status if you Logout with expired token", (done) => {
     api
       .get("/api/v1/edu/auth/logout")
       .set("Authorization", `Bearer ${loginToken}`)
       .end((err, res) => {
         const { message } = res.body;
-        expect(res.status).to.equal(unAuthorized);
+        expect(res.status).to.equal(ok);
         expect(message);
         done();
       });
