@@ -4,7 +4,7 @@ COPY package.json .
 RUN npm install
 COPY . .
 
-FROM alpine:3.12
+FROM node:12-alpine 
 WORKDIR  '/app'
 COPY --from=build /app /app
-CMD ["npm","run", "start"]
+CMD ["npm","run", "start:prod"]
