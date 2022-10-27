@@ -29,8 +29,6 @@ export const eduUserLogout = catchAsync(async (req, res, next) => {
   const { userId } = req.currentUser;
   const accessToken = req.decodedAccessToken;
 
-  console.log('LOGOUT TOKEN:', accessToken);
-
   await deleteToken(userId.toString());
 
   await setToken(`BL_${userId.toString()}`, JSON.stringify({ accessToken }));

@@ -15,6 +15,15 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          userId: 99991,
+          identityNumber: "qwe1233nefu12",
+          role: "tester",
+          identityNumberType: "passport",
+          isVerified: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );
