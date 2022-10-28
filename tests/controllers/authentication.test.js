@@ -2,7 +2,7 @@ import chai from "chai";
 import chaiHttp from "chai-http";
 import server from "../../src/app.js";
 import statusCode from "../../src/utils/statusCodes";
-import { eBindSuperAdmin } from "../mockData/usersMockData.js";
+import { eBindTester } from "../mockData/usersMockData.js";
 import mockData from "../mockData/mockData.js";
 
 const { ok, unAuthorized } = statusCode;
@@ -28,7 +28,7 @@ describe("Authentication", () => {
   it("Should return 200 status if Login was successful", (done) => {
     api
       .post("/api/v1/edu/auth/login")
-      .send(eBindSuperAdmin)
+      .send(eBindTester)
       .end((err, res) => {
         const { data } = res.body;
         loginToken = data.tokens.accessToken;
@@ -70,13 +70,13 @@ describe("Authentication", () => {
     });
   });
 
-  it("Should return 401 status if you Logout with expired token", (done) => {
+  it("Should return 200 status if you Logout with expired token", (done) => {
     api
       .get("/api/v1/edu/auth/logout")
       .set("Authorization", `Bearer ${loginToken}`)
       .end((err, res) => {
         const { message } = res.body;
-        expect(res.status).to.equal(unAuthorized);
+        expect(res.status).to.equal(ok);
         expect(message);
         done();
       });

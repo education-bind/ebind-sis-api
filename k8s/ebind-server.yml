@@ -32,7 +32,7 @@ spec:
       image: uwambajeddy/ebind-node-server:latest
       resources:
         limits:
-          memory: "128Mi"
+          memory: "300Mi"
           cpu: "500m"
       ports:
         - containerPort: 6379

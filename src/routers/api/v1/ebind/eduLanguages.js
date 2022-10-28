@@ -1,8 +1,5 @@
 import express from "express";
-import {
-  createEduPermission,
-  updateEduPermission,
-} from "../../../../controllers/eduPermissions.controller";
+import { createEduLanguage, updateEduLanguage } from "../../../../controllers/eduLanguages.controller";
 import {
   isEbindUserLoggedInAndVerified,
   verifyToken,
@@ -10,7 +7,7 @@ import {
 import { findAllData, findData } from "../../../../middlewares/contentChecker";
 import { temporaryDelete } from "../../../../services/deleteContent.service";
 import { getData } from "../../../../services/getContent.service";
-import { validateEduPermission } from "../../../../utils/validations";
+import { validateEduLanguage, validateUpdateEduLanguage } from "../../../../utils/validations";
 
 const router = express.Router();
 
@@ -20,12 +17,12 @@ router.get("/:id", findData("edu_languages"), getData);
 router.use(verifyToken);
 
 router.use(isEbindUserLoggedInAndVerified);
-router.post("/", validateEduPermission, createEduPermission);
+router.post("/", validateEduLanguage, createEduLanguage);
 router.patch(
   "/:id",
-  validateEduPermission,
+  validateUpdateEduLanguage,
   findData("edu_languages"),
-  updateEduPermission
+  updateEduLanguage
 );
 router.delete("/:id", findData("edu_languages"), temporaryDelete);
 

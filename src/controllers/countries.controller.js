@@ -21,7 +21,8 @@ export const createCountry = catchAsync(async (req, res) => {
 
 export const updateCountry = catchAsync(async (req, res) => {
   const id = req.params.id;
-  const { name, code, extension, latitude, longitude } = req.body;
+  let { name, code, extension, latitude, longitude } = req.body;
+
   const country = await countries.update(
     {
       name,

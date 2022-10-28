@@ -41,9 +41,11 @@ export default {
   eduLanguages: {
     createLanguage: {
       name: "english",
+      abbreviation: "eng",
     },
     updateLanguage: {
       name: "kinyarwanda",
+      abbrevivation: "kiny",
     },
   },
   eduUserTypes: {

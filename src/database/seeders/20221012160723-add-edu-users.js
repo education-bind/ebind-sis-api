@@ -24,6 +24,21 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          id: 99991,
+          userTypeId: 3,
+          communityCountryId: 1,
+          firstName: "tester",
+          lastName: "tester",
+          userName: "tester",
+          mailingAddress: "tester@gmail.com",
+          email: "tester@gmail.com",
+          phoneNumber: "098123881",
+          gender: "male",
+          password: await hash("test", 12),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );

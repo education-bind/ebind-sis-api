@@ -7,18 +7,19 @@ const { edu_languages } = db;
 const { ok, created } = statusCode;
 
 export const createEduLanguage = catchAsync(async (req, res) => {
-  const { name } = req.body;
-  const language = await edu_languages.create({ name });
+  const { name, abbreviation } = req.body;
+  const language = await edu_languages.create({ name, abbreviation });
 
   return successResponse(res, created, language);
 });
 
 export const updateEduLanguage = catchAsync(async (req, res) => {
   const id = req.params.id;
-  const { name } = req.body;
+  let { name, abbreviation } = req.body;
+
   const language = await edu_languages.update(
     {
-      name,
+      name, abbreviation,
     },
     {
       where: { id },

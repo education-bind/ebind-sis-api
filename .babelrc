@@ -12,6 +12,12 @@
   "plugins": [
     ["add-module-exports"],
     [
+      "module-resolver",
+      {
+        "root": ["./src"]
+      }
+    ],
+    [
       "@babel/plugin-transform-runtime",
       {
         "regenerator": true

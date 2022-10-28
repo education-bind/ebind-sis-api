@@ -2,10 +2,26 @@ import Joi from "joi";
 import AppError from "./appError";
 import catchAsync from "./catchAsync";
 import statusCode from "../utils/statusCodes";
-import messages from "../utils/customMessages";
 
 const { badRequest } = statusCode;
-const { } = messages;
+
+async function validator(schema, data, next) {
+  const validator = await schema.validate(data, {
+    abortEarly: false,
+  });
+  const { error } = validator;
+
+  if (error) {
+    const { details } = error;
+    const messages = details
+      .map((err) => err.message.replace(/['"]/g, ""))
+      .join(", ");
+
+    return next(new AppError(messages, badRequest));
+  }
+
+  return next();
+}
 
 export const validateCountry = catchAsync(async (req, res, next) => {
   const data = {
@@ -23,21 +39,8 @@ export const validateCountry = catchAsync(async (req, res, next) => {
     code: Joi.number().required(),
   });
 
-  const validator = await schema.validate(data, {
-    abortEarly: false,
-  });
-  const { error } = validator;
+  validator(schema, data, next)
 
-  if (error) {
-    const { details } = error;
-    const messages = details
-      .map((err) => err.message.replace(/['"]/g, ""))
-      .join(", ");
-
-    return next(new AppError(messages, badRequest));
-  }
-
-  return next();
 });
 export const validateUpdateCountry = catchAsync(async (req, res, next) => {
   const data = {
@@ -55,21 +58,7 @@ export const validateUpdateCountry = catchAsync(async (req, res, next) => {
     code: Joi.number(),
   });
 
-  const validator = await schema.validate(data, {
-    abortEarly: false,
-  });
-  const { error } = validator;
-
-  if (error) {
-    const { details } = error;
-    const messages = details
-      .map((err) => err.message.replace(/['"]/g, ""))
-      .join(", ");
-
-    return next(new AppError(messages, badRequest));
-  }
-
-  return next();
+  validator(schema, data, next)
 });
 
 export const validateEduPermission = catchAsync(async (req, res, next) => {
@@ -80,46 +69,33 @@ export const validateEduPermission = catchAsync(async (req, res, next) => {
     name: Joi.string().required(),
   });
 
-  const validator = await schema.validate(data, {
-    abortEarly: false,
-  });
-  const { error } = validator;
-
-  if (error) {
-    const { details } = error;
-    const messages = details
-      .map((err) => err.message.replace(/['"]/g, ""))
-      .join(", ");
-
-    return next(new AppError(messages, badRequest));
-  }
-
-  return next();
+  validator(schema, data, next)
 });
 
 export const validateEduLanguage = catchAsync(async (req, res, next) => {
   const data = {
     name: req.body.name,
+    abbreviation: req.body.abbreviation,
   };
   const schema = Joi.object({
     name: Joi.string().required(),
+    abbreviation: Joi.string().required(),
   });
 
-  const validator = await schema.validate(data, {
-    abortEarly: false,
+  validator(schema, data, next)
+});
+
+export const validateUpdateEduLanguage = catchAsync(async (req, res, next) => {
+  const data = {
+    name: req.body.name,
+    abbreviation: req.body.abbreviation,
+  };
+  const schema = Joi.object({
+    name: Joi.string(),
+    abbreviation: Joi.string(),
   });
-  const { error } = validator;
 
-  if (error) {
-    const { details } = error;
-    const messages = details
-      .map((err) => err.message.replace(/['"]/g, ""))
-      .join(", ");
-
-    return next(new AppError(messages, badRequest));
-  }
-
-  return next();
+  validator(schema, data, next)
 });
 
 export const validateEduUserTypes = catchAsync(async (req, res, next) => {
@@ -130,19 +106,5 @@ export const validateEduUserTypes = catchAsync(async (req, res, next) => {
     name: Joi.string().required(),
   });
 
-  const validator = await schema.validate(data, {
-    abortEarly: false,
-  });
-  const { error } = validator;
-
-  if (error) {
-    const { details } = error;
-    const messages = details
-      .map((err) => err.message.replace(/['"]/g, ""))
-      .join(", ");
-
-    return next(new AppError(messages, badRequest));
-  }
-
-  return next();
+  validator(schema, data, next)
 });
