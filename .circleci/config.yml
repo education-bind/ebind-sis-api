@@ -28,21 +28,21 @@ jobs:
           root: .
           paths:
             - .
-  build_docker_image:
-    machine:
-      image: ubuntu-2004:202101-01
-    steps:
-      - attach_workspace:
-          at: .
-      - checkout
-      - run:
-          name: "Build Docker Image Server"
-          command: |
-            export TAG='0.1.<< pipeline.number >>'
-            export IMAGE_NAME=ebind-node-server
-            docker build -t $DOCKER_LOGIN/$IMAGE_NAME -t $DOCKER_LOGIN/$IMAGE_NAME:$TAG .
-            echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
-            docker push -a $DOCKER_LOGIN/$IMAGE_NAME
+  # build_docker_image:
+  #   machine:
+  #     image: ubuntu-2004:202101-01
+  #   steps:
+  #     - attach_workspace:
+  #         at: .
+  #     - checkout
+  #     - run:
+  #         name: "Build Docker Image Server"
+  #         command: |
+  #           export TAG='0.1.<< pipeline.number >>'
+  #           export IMAGE_NAME=ebind-node-server
+  #           docker build -t $DOCKER_LOGIN/$IMAGE_NAME -t $DOCKER_LOGIN/$IMAGE_NAME:$TAG .
+  #           echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
+  #           docker push -a $DOCKER_LOGIN/$IMAGE_NAME
 
 workflows:
   build:
@@ -51,6 +51,6 @@ workflows:
       - run-tests:
           requires:
             - build
-      - build_docker_image:
-          requires:
-            - run-tests
+      # - build_docker_image:
+      #     requires:
+      #       - run-tests

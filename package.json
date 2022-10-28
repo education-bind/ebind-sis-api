@@ -7,7 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node --exec babel-node ./src/server.js",
+    "build": "babel src -d build",
+    "start": "npm run build && node build/server.js",
     "start:prod": "nodemon --exec babel-node ./src/server.js",
     "start:dev": "nodemon --exec babel-node ./src/server.js",
     "migrate": "npx sequelize-cli db:migrate",
@@ -15,8 +16,7 @@
     "seed": "npx sequelize-cli db:seed:all",
     "undo-seed": "npx sequelize-cli db:seed:undo",
     "test": "npm run down && npm run migrate && npm run seed && nyc mocha --require @babel/register ./tests/**/*.js --timeout 30000 --exit",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "build": "npm run down && npm run migrate && npm run seed && npm run start:prod"
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -29,10 +29,20 @@
   },
   "homepage": "https://github.com/education-bind/ebind-backend#readme",
   "devDependencies": {
-    "@babel/core": "^7.18.5",
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/node": "^7.14.9",
+    "@babel/preset-env": "^7.15.0",
+    "babel-plugin-module-resolver": "^4.1.0",
     "@babel/plugin-proposal-class-properties": "^7.17.12",
     "@babel/plugin-transform-runtime": "^7.17.12",
-    "@babel/preset-env": "^7.18.2",
+    "@babel/compat-data": "^7.17.10",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/register": "^7.17.7",
+    "@babel/runtime": "^7.17.9",
+    "babel-eslint": "^10.1.0",
+    "babel-node": "^0.0.1-security",
+    "babel-register": "^6.26.0",
     "@babel/preset-react": "^7.17.12",
     "@types/compression": "^1.7.2",
     "@types/cookie-parser": "^1.4.3",
@@ -65,15 +75,6 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "@babel/cli": "^7.19.3",
-    "@babel/compat-data": "^7.17.10",
-    "@babel/node": "^7.17.10",
-    "@babel/polyfill": "^7.12.1",
-    "@babel/register": "^7.17.7",
-    "@babel/runtime": "^7.17.9",
-    "babel-eslint": "^10.1.0",
-    "babel-node": "^0.0.1-security",
-    "babel-register": "^6.26.0",
     "bcryptjs": "^2.4.3",
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
