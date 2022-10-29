@@ -23,7 +23,6 @@ app.use((_, res, next) => {
 });
 
 if (process.env.NODE_ENV === "development") {
-  console.log("NODE_ENV=====>", process.env.NODE_ENV)
   app.use(morgan("dev"));
 }
 
