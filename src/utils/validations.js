@@ -39,8 +39,7 @@ export const validateCountry = catchAsync(async (req, res, next) => {
     code: Joi.number().required(),
   });
 
-  validator(schema, data, next)
-
+  validator(schema, data, next);
 });
 export const validateUpdateCountry = catchAsync(async (req, res, next) => {
   const data = {
@@ -58,7 +57,7 @@ export const validateUpdateCountry = catchAsync(async (req, res, next) => {
     code: Joi.number(),
   });
 
-  validator(schema, data, next)
+  validator(schema, data, next);
 });
 
 export const validateEduPermission = catchAsync(async (req, res, next) => {
@@ -69,7 +68,7 @@ export const validateEduPermission = catchAsync(async (req, res, next) => {
     name: Joi.string().required(),
   });
 
-  validator(schema, data, next)
+  validator(schema, data, next);
 });
 
 export const validateEduLanguage = catchAsync(async (req, res, next) => {
@@ -82,7 +81,7 @@ export const validateEduLanguage = catchAsync(async (req, res, next) => {
     abbreviation: Joi.string().required(),
   });
 
-  validator(schema, data, next)
+  validator(schema, data, next);
 });
 
 export const validateUpdateEduLanguage = catchAsync(async (req, res, next) => {
@@ -95,7 +94,7 @@ export const validateUpdateEduLanguage = catchAsync(async (req, res, next) => {
     abbreviation: Joi.string(),
   });
 
-  validator(schema, data, next)
+  validator(schema, data, next);
 });
 
 export const validateEduUserTypes = catchAsync(async (req, res, next) => {
@@ -106,5 +105,109 @@ export const validateEduUserTypes = catchAsync(async (req, res, next) => {
     name: Joi.string().required(),
   });
 
-  validator(schema, data, next)
+  validator(schema, data, next);
+});
+
+export const validateSchool = catchAsync(async (req, res, next) => {
+  const data = {
+    name: req.body.name,
+    abbreviation: req.body.abbreviation,
+    country: req.body.country,
+    city: req.body.city,
+    admin: req.body.admin,
+    regDate: req.body.regDate,
+    email: req.body.email,
+    phoneNumber: req.body.phoneNumber,
+    description: req.body.description,
+    logoImage: process.env.NODE_ENV === "test" ? req.body.logoImage : req.file,
+    latitude: req.body.latitude,
+    longitude: req.body.longitude,
+  };
+  const schema = Joi.object({
+    name: Joi.string().required(),
+    abbreviation: Joi.string().required(),
+    country: Joi.number().required(),
+    city: Joi.string().required(),
+    admin: Joi.number().required(),
+    regDate: Joi.date().required(),
+    email: Joi.string().email(),
+    phoneNumber: Joi.number(),
+    description: Joi.string(),
+    logoImage: Joi.any(),
+    latitude: Joi.string(),
+    longitude: Joi.string(),
+  });
+
+  validator(schema, data, next);
+});
+
+export const validateUpdateSchool = catchAsync(async (req, res, next) => {
+  const data = {
+    name: req.body.name,
+    abbreviation: req.body.abbreviation,
+    country: req.body.country,
+    city: req.body.city,
+    admin: req.body.admin,
+    regDate: req.body.regDate,
+    email: req.body.email,
+    phoneNumber: req.body.phoneNumber,
+    description: req.body.description,
+    logoImage: req.file,
+    latitude: req.body.latitude,
+    longitude: req.body.longitude,
+  };
+  const schema = Joi.object({
+    name: Joi.string(),
+    abbreviation: Joi.string(),
+    country: Joi.number(),
+    city: Joi.string(),
+    admin: Joi.number(),
+    regDate: Joi.date(),
+    email: Joi.string().email(),
+    phoneNumber: Joi.number(),
+    description: Joi.string(),
+    logoImage: Joi.any(),
+    latitude: Joi.string(),
+    longitude: Joi.string(),
+  });
+
+  validator(schema, data, next);
+});
+
+export const validateEduFaculties = catchAsync(async (req, res, next) => {
+  const data = {
+    name: req.body.name,
+    country: req.body.country,
+    description: req.body.description,
+    logoImage: process.env.NODE_ENV === "test" ? req.body.logoImage : req.file,
+    abbreviation: req.body.abbreviation,
+  };
+  const schema = Joi.object({
+    name: Joi.string().required(),
+    country: Joi.number().required(),
+    description: Joi.string().required(),
+    logoImage: Joi.any().required(),
+    abbreviation: Joi.string().required(),
+  });
+
+  validator(schema, data, next);
+});
+
+export const validateUpdateEduFaculties = catchAsync(async (req, res, next) => {
+  const data = {
+    name: req.body.name,
+    country: req.body.country,
+    description: req.body.description,
+    logoImage: req.file,
+    abbreviation: req.body.abbreviation,
+  };
+  const schema = Joi.object({
+    name: Joi.string(),
+    country: Joi.number(),
+    description: Joi.string(),
+    logoImage: Joi.any(),
+    abbreviation: Joi.string(),
+  });
+
+  validator(schema, data, next);
 });

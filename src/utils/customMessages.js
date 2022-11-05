@@ -2,6 +2,7 @@ const messages = {
   serverErrorMessage:
     "Sorry, something went wrong on our end, please try again later",
   wrongDatabase: "Specify an existing database name",
+  invalidImage: "Not an image! Please upload only images.",
   endpointNotFound: "The requested resource was not found",
   noContent: "The content you requested was not found",
   contentDeleted: "Content deleted successfully!",
