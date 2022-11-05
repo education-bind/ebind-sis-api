@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ schools, edu_faculties }) {
       this.belongsTo(edu_faculties, {
-        foreignKey: "educationFaciltyId",
-        as: "educationFacilty",
+        foreignKey: "educationFacultyId",
+        as: "educationFaculty",
       });
       this.belongsTo(schools, { foreignKey: "schoolId", as: "school" });
     }

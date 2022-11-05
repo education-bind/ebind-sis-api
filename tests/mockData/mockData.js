@@ -56,4 +56,40 @@ export default {
       name: "student",
     },
   },
+  schools: {
+    createSchools: {
+      city: "Rubonobono",
+      name: "Kagugu tvet",
+      abbreviation: "Kat",
+      admin: 99999,
+      regDate: "2022-11-04T20:26:03.008Z",
+      email: "kat@gmail.com",
+      phoneNumber: "1234462880",
+      description: "we cool",
+      logoImage: "kat.png",
+      longitude: "1.99",
+      latitude: "30.32",
+      country: 1,
+    },
+    updateSchools: {
+      city: "Kigali",
+      name: "kglvilla",
+      email: "kati@gmail.com",
+      description: "we are cool",
+      logoImage: "kaat.png",
+    },
+  },
+  eduFaculties: {
+    createFaculty: {
+      name: "rwanda education board",
+      abbreviation: "WDA",
+      logoImage: "kat.png",
+      description: "we cool",
+      country: 1,
+    },
+    updateFaculty: {
+      description: "we are cool",
+      logoImage: "kaat.png",
+    },
+  },
 };

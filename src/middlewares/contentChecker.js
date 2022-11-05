@@ -3,7 +3,14 @@ import AppError from "../utils/appError";
 import messages from "../utils/customMessages";
 import statusCode from "../utils/statusCodes";
 
-const { countries, edu_permissions, edu_user_types, edu_languages } = db;
+const {
+  countries,
+  edu_permissions,
+  edu_user_types,
+  edu_languages,
+  schools,
+  edu_faculties,
+} = db;
 const { notFound, serverError } = statusCode;
 const { noContent, wrongDatabase } = messages;
 
@@ -37,6 +44,10 @@ export const findData = (database) => {
         return findInDatabase(edu_languages, id, req, next);
       case "edu_user_types":
         return findInDatabase(edu_user_types, id, req, next);
+      case "schools":
+        return findInDatabase(schools, id, req, next);
+      case "edu_faculties":
+        return findInDatabase(edu_faculties, id, req, next);
       default:
         return next(new AppError(wrongDatabase, serverError));
     }
@@ -70,6 +81,10 @@ export const findAllData = (database) => {
         return findInDatabase(edu_languages, req, next);
       case "edu_user_types":
         return findInDatabase(edu_user_types, req, next);
+      case "schools":
+        return findInDatabase(schools, req, next);
+      case "edu_faculties":
+        return findInDatabase(edu_faculties, req, next);
       default:
         return next(new AppError(wrongDatabase, serverError));
     }
