@@ -39,7 +39,6 @@ app.use(urlencoded());
 app.use(json());
 app.use(helmet());
 app.use(compression());
-app.use(express.static(`public`));
 
 app.use(allRoutes);
 
