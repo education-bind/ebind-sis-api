@@ -23,6 +23,9 @@ var _compression = _interopRequireDefault(require("compression"));
 
 var _routers = _interopRequireDefault(require("./routers"));
 
+var _bodyParser = _interopRequireDefault(require("body-parser"));
+
+const { urlencoded, json } = _bodyParser.default;
 const app = (0, _express.default)();
 app.use((0, _cors.default)());
 app.enable("trust proxy");
@@ -41,11 +44,11 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use((0, _cookieParser.default)());
-app.use(_express.default.json());
-app.use(_express.default.urlencoded());
+app.use(urlencoded());
+app.use(json());
 app.use((0, _helmet.default)());
 app.use((0, _compression.default)());
-app.use(_express.default.static(`${__dirname}/public`));
+app.use(_express.default.static(`public`));
 app.use(_routers.default);
 app.use(_error.default);
 var _default = app;
