@@ -23,15 +23,12 @@ var _compression = _interopRequireDefault(require("compression"));
 
 var _routers = _interopRequireDefault(require("./routers"));
 
-var _bodyParser = _interopRequireDefault(require("body-parser"));
-
 var _appError = _interopRequireDefault(require("./utils/appError"));
 
 var _customMessages = _interopRequireDefault(require("./utils/customMessages"));
 
 var _statusCodes = _interopRequireDefault(require("./utils/statusCodes"));
 
-const { urlencoded, json } = _bodyParser.default;
 const { endpointNotFound } = _customMessages.default;
 const { notFound } = _statusCodes.default;
 const app = (0, _express.default)();
@@ -52,8 +49,12 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use((0, _cookieParser.default)());
-app.use(urlencoded());
-app.use(json());
+app.use(
+  _express.default.urlencoded({
+    extended: true,
+  })
+);
+app.use(_express.default.json());
 app.use((0, _helmet.default)());
 app.use((0, _compression.default)());
 app.use(_routers.default);
