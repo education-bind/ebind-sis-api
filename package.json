@@ -9,7 +9,7 @@
   "scripts": {
     "build": "babel src -d build",
     "start": "node build/server.js",
-    "prod": "node --exec babel-node ./src/server.js",
+    "prod": "npx babel-node --presets @babel/preset-env -- ./src/server.js",
     "dev": "nodemon --exec babel-node ./src/server.js",
     "migrate": "npx sequelize-cli db:migrate",
     "down": "npx sequelize-cli db:migrate:undo:all",
