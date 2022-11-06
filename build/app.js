@@ -56,7 +56,6 @@ app.use(urlencoded());
 app.use(json());
 app.use((0, _helmet.default)());
 app.use((0, _compression.default)());
-app.use(_express.default.static(`public`));
 app.use(_routers.default);
 app.use((req, res, next) => {
   next(new _appError.default(endpointNotFound, notFound));
