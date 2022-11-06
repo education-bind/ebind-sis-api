@@ -58,11 +58,9 @@ app.use((0, _helmet.default)());
 app.use((0, _compression.default)());
 app.use(_express.default.static(`public`));
 app.use(_routers.default);
-
-_routers.default.use((req, res, next) => {
+app.use((req, res, next) => {
   next(new _appError.default(endpointNotFound, notFound));
 });
-
 app.use(_error.default);
 var _default = app;
 exports.default = _default;
