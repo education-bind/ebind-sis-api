@@ -7,7 +7,13 @@ import globalErrorHandler from "./controllers/error.controller";
 import compression from "compression";
 import allRoutes from "./routers";
 import bodyParser from "body-parser";
+import AppError from "./utils/appError";
+import messages from "./utils/customMessages";
+import statusCode from "./utils/statusCodes";
+
 const { urlencoded, json } = bodyParser;
+const { endpointNotFound } = messages;
+const { notFound } = statusCode;
 
 const app = express();
 
@@ -36,6 +42,10 @@ app.use(compression());
 app.use(express.static(`public`));
 
 app.use(allRoutes);
+
+allRoutes.use((req, res, next) => {
+  next(new AppError(endpointNotFound, notFound));
+});
 
 app.use(globalErrorHandler);
 

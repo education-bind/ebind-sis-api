@@ -25,7 +25,15 @@ var _routers = _interopRequireDefault(require("./routers"));
 
 var _bodyParser = _interopRequireDefault(require("body-parser"));
 
+var _appError = _interopRequireDefault(require("./utils/appError"));
+
+var _customMessages = _interopRequireDefault(require("./utils/customMessages"));
+
+var _statusCodes = _interopRequireDefault(require("./utils/statusCodes"));
+
 const { urlencoded, json } = _bodyParser.default;
+const { endpointNotFound } = _customMessages.default;
+const { notFound } = _statusCodes.default;
 const app = (0, _express.default)();
 app.use((0, _cors.default)());
 app.enable("trust proxy");
@@ -50,6 +58,11 @@ app.use((0, _helmet.default)());
 app.use((0, _compression.default)());
 app.use(_express.default.static(`public`));
 app.use(_routers.default);
+
+_routers.default.use((req, res, next) => {
+  next(new _appError.default(endpointNotFound, notFound));
+});
+
 app.use(_error.default);
 var _default = app;
 exports.default = _default;
