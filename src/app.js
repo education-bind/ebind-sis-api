@@ -43,7 +43,7 @@ app.use(express.static(`public`));
 
 app.use(allRoutes);
 
-allRoutes.use((req, res, next) => {
+app.use((req, res, next) => {
   next(new AppError(endpointNotFound, notFound));
 });
 

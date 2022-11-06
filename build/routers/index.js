@@ -14,7 +14,7 @@ var _index = _interopRequireDefault(require("./api/index"));
 function cov_6zznl61j8() {
   var path =
     "C:\\Users\\Eddy\\Documents\\GitHub\\ebind-backend\\src\\routers\\index.js";
-  var hash = "7db2890a180cd0c55a344fd56ab83e32374a5763";
+  var hash = "78ee3f2acf11822043f17f6b47ce8150624b458c";
   var global = new Function("return this")();
   var gcv = "__coverage__";
   var coverageData = {
@@ -22,21 +22,21 @@ function cov_6zznl61j8() {
     statementMap: {
       0: {
         start: {
-          line: 6,
+          line: 4,
           column: 18,
         },
         end: {
-          line: 6,
+          line: 4,
           column: 34,
         },
       },
       1: {
         start: {
-          line: 8,
+          line: 6,
           column: 0,
         },
         end: {
-          line: 8,
+          line: 6,
           column: 33,
         },
       },
@@ -50,7 +50,7 @@ function cov_6zznl61j8() {
     f: {},
     b: {},
     _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    hash: "7db2890a180cd0c55a344fd56ab83e32374a5763",
+    hash: "78ee3f2acf11822043f17f6b47ce8150624b458c",
   };
   var coverage = global[gcv] || (global[gcv] = {});
 
