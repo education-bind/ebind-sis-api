@@ -1,5 +1,6 @@
 import db from "../database/models";
 import AppError from "../utils/appError";
+import catchAsync from "../utils/catchAsync";
 import messages from "../utils/customMessages";
 import statusCode from "../utils/statusCodes";
 
@@ -15,22 +16,18 @@ const { notFound, serverError } = statusCode;
 const { noContent, wrongDatabase } = messages;
 
 export const findData = (database) => {
-  const findInDatabase = async (databaseTable, id, req, next) => {
-    try {
-      const content = await databaseTable.findOne({
-        where: { id, active: true },
-      });
+  const findInDatabase = catchAsync(async (databaseTable, id, req, next) => {
+    const content = await databaseTable.findOne({
+      where: { id, active: true },
+    });
 
-      if (!content) {
-        return next(new AppError(noContent, notFound));
-      }
-      req.foundData = content;
-      req.databaseTable = databaseTable;
-      return next();
-    } catch (error) {
-      return next(new AppError(error));
+    if (!content) {
+      return next(new AppError(noContent, notFound));
     }
-  };
+    req.foundData = content;
+    req.databaseTable = databaseTable;
+    return next();
+  });
 
   return (req, res, next) => {
     const { id } = req.params;
@@ -55,21 +52,17 @@ export const findData = (database) => {
 };
 
 export const findAllData = (database) => {
-  const findInDatabase = async (databaseTable, req, next) => {
-    try {
-      const content = await databaseTable.findAll({
-        where: { active: true },
-      });
-      if (!content) {
-        return next(new AppError(noContent, notFound));
-      }
-      req.foundData = content;
-      req.databaseTable = databaseTable;
-      return next();
-    } catch (error) {
-      return next(new AppError(error));
+  const findInDatabase = catchAsync(async (databaseTable, req, next) => {
+    const content = await databaseTable.findAll({
+      where: { active: true },
+    });
+    if (!content) {
+      return next(new AppError(noContent, notFound));
     }
-  };
+    req.foundData = content;
+    req.databaseTable = databaseTable;
+    return next();
+  });
 
   return (req, res, next) => {
     switch (database) {
