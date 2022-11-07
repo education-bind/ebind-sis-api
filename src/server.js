@@ -12,9 +12,7 @@ import app from "./app";
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
-  if (process.send) {
-    process.send(`Server running at http://localhost:${port}\n\n`);
-  }
+  logger.warn(`\nServer running at http://localhost:${port}\n`);
 });
 
 /* if (process.env.NODE_ENV === "development") {
