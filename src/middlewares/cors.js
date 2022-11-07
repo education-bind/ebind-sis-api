@@ -1,8 +1,12 @@
 import cors from "cors";
-import settings from "../lib/settings.js";
 
+const urls = {
+  prod: "https://www.educationbind.com",
+  dev: "http://localhost:3000",
+  app: "http://localhost:5000",
+};
 const urlsAllowedToAccess =
-  Object.entries(settings.urls || {}).map(([key, value]) => value) || [];
+  Object.entries(urls || {}).map(([key, value]) => value) || [];
 
 export const configuration = {
   credentials: true,
