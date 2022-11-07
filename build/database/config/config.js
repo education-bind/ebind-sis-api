@@ -3,7 +3,7 @@
 function cov_2r4yq9li8p() {
   var path =
     "C:\\Users\\Eddy\\Documents\\GitHub\\ebind-backend\\src\\database\\config\\config.js";
-  var hash = "6cf2ec0981d120bf595be97e6b42e1fda078bd8b";
+  var hash = "bb3ce80767eea3c88aaeb6938a12bc52f2a4cb42";
   var global = new Function("return this")();
   var gcv = "__coverage__";
   var coverageData = {
@@ -117,7 +117,7 @@ function cov_2r4yq9li8p() {
             },
             end: {
               line: 22,
-              column: 5,
+              column: 7,
             },
           },
           {
@@ -149,7 +149,7 @@ function cov_2r4yq9li8p() {
       0: [0, 0],
     },
     _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    hash: "6cf2ec0981d120bf595be97e6b42e1fda078bd8b",
+    hash: "bb3ce80767eea3c88aaeb6938a12bc52f2a4cb42",
   };
   var coverage = global[gcv] || (global[gcv] = {});
 
