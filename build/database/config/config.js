@@ -1,151 +1,155 @@
 "use strict";
 
 function cov_2r4yq9li8p() {
-  var path = "C:\\Users\\Eddy\\Documents\\GitHub\\ebind-backend\\src\\database\\config\\config.js";
-  var hash = "6cf2ec0981d120bf595be97e6b42e1fda078bd8b";
+  var path =
+    "C:\\Users\\Eddy\\Documents\\GitHub\\ebind-backend\\src\\database\\config\\config.js";
+  var hash = "bb3ce80767eea3c88aaeb6938a12bc52f2a4cb42";
   var global = new Function("return this")();
   var gcv = "__coverage__";
   var coverageData = {
     path: "C:\\Users\\Eddy\\Documents\\GitHub\\ebind-backend\\src\\database\\config\\config.js",
     statementMap: {
-      "0": {
+      0: {
         start: {
           line: 1,
-          column: 15
+          column: 15,
         },
         end: {
           line: 1,
-          column: 32
-        }
+          column: 32,
+        },
       },
-      "1": {
+      1: {
         start: {
           line: 2,
-          column: 0
+          column: 0,
         },
         end: {
           line: 2,
-          column: 16
-        }
+          column: 16,
+        },
       },
-      "2": {
+      2: {
         start: {
           line: 13,
-          column: 4
+          column: 4,
         },
         end: {
           line: 13,
-          column: 15
-        }
+          column: 15,
+        },
       },
-      "3": {
+      3: {
         start: {
           line: 15,
-          column: 22
+          column: 22,
         },
         end: {
           line: 24,
-          column: 1
-        }
+          column: 1,
+        },
       },
-      "4": {
+      4: {
         start: {
           line: 16,
-          column: 2
+          column: 2,
         },
         end: {
           line: 23,
-          column: 9
-        }
+          column: 9,
+        },
       },
-      "5": {
+      5: {
         start: {
           line: 26,
-          column: 0
+          column: 0,
         },
         end: {
           line: 62,
-          column: 2
-        }
-      }
+          column: 2,
+        },
+      },
     },
     fnMap: {
-      "0": {
+      0: {
         name: "(anonymous_0)",
         decl: {
           start: {
             line: 15,
-            column: 22
+            column: 22,
           },
           end: {
             line: 15,
-            column: 23
-          }
+            column: 23,
+          },
         },
         loc: {
           start: {
             line: 15,
-            column: 28
+            column: 28,
           },
           end: {
             line: 24,
-            column: 1
-          }
+            column: 1,
+          },
         },
-        line: 15
-      }
+        line: 15,
+      },
     },
     branchMap: {
-      "0": {
+      0: {
         loc: {
           start: {
             line: 16,
-            column: 9
+            column: 9,
           },
           end: {
             line: 23,
-            column: 8
-          }
+            column: 8,
+          },
         },
         type: "cond-expr",
-        locations: [{
-          start: {
-            line: 17,
-            column: 6
+        locations: [
+          {
+            start: {
+              line: 17,
+              column: 6,
+            },
+            end: {
+              line: 22,
+              column: 7,
+            },
           },
-          end: {
-            line: 22,
-            column: 5
-          }
-        }, {
-          start: {
-            line: 23,
-            column: 6
+          {
+            start: {
+              line: 23,
+              column: 6,
+            },
+            end: {
+              line: 23,
+              column: 8,
+            },
           },
-          end: {
-            line: 23,
-            column: 8
-          }
-        }],
-        line: 16
-      }
+        ],
+        line: 16,
+      },
     },
     s: {
-      "0": 0,
-      "1": 0,
-      "2": 0,
-      "3": 0,
-      "4": 0,
-      "5": 0
+      0: 0,
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
     },
     f: {
-      "0": 0
+      0: 0,
     },
     b: {
-      "0": [0, 0]
+      0: [0, 0],
     },
     _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    hash: "6cf2ec0981d120bf595be97e6b42e1fda078bd8b"
+    hash: "bb3ce80767eea3c88aaeb6938a12bc52f2a4cb42",
   };
   var coverage = global[gcv] || (global[gcv] = {});
 
@@ -175,19 +179,22 @@ const {
   DATABASE_HOST,
   DATABASE_PORT,
   TEST_DATABASE,
-  TEST_GIT_ACTIONS
+  TEST_GIT_ACTIONS,
 } = (cov_2r4yq9li8p().s[2]++, process.env);
 cov_2r4yq9li8p().s[3]++;
 
 const dialectToggle = () => {
   cov_2r4yq9li8p().f[0]++;
   cov_2r4yq9li8p().s[4]++;
-  return TEST_GIT_ACTIONS == "true" ? (cov_2r4yq9li8p().b[0][0]++, {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
-  }) : (cov_2r4yq9li8p().b[0][1]++, {});
+  return TEST_GIT_ACTIONS == "true"
+    ? (cov_2r4yq9li8p().b[0][0]++,
+      {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false,
+        },
+      })
+    : (cov_2r4yq9li8p().b[0][1]++, {});
 };
 
 cov_2r4yq9li8p().s[5]++;
@@ -198,7 +205,7 @@ module.exports = {
     database: DEV_DATABASE,
     host: DATABASE_HOST,
     port: DATABASE_PORT,
-    dialect: "postgres"
+    dialect: "postgres",
   },
   test: {
     username: DATABASE_USER,
@@ -209,7 +216,7 @@ module.exports = {
     dialect: "postgres",
     logging: false,
     protocol: "postgres",
-    dialectOptions: dialectToggle()
+    dialectOptions: dialectToggle(),
   },
   production: {
     username: DATABASE_USER,
@@ -223,8 +230,8 @@ module.exports = {
     dialectOptions: {
       ssl: {
         require: true,
-        rejectUnauthorized: false
-      }
-    }
-  }
+        rejectUnauthorized: false,
+      },
+    },
+  },
 };
