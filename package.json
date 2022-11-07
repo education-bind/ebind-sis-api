@@ -18,8 +18,7 @@
     "undo-seed": "npx sequelize-cli db:seed:undo",
     "test": "npm run down && npm run migrate && npm run seed && nyc mocha --require @babel/register ./tests/**/*.js --timeout 30000 --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "lint-staged": "lint-staged",
-    "postinstall": "husky install"
+    "lint-staged": "lint-staged"
   },
   "repository": {
     "type": "git",
@@ -88,7 +87,6 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
     "express": "^4.18.2",
-    "husky": "^8.0.1",
     "joi": "^17.6.2",
     "jsonwebtoken": "^8.5.1",
     "lint-staged": "^13.0.3",
