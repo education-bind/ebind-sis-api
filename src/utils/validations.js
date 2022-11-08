@@ -70,6 +70,16 @@ export const validateEduPermission = catchAsync(async (req, res, next) => {
 
   validator(schema, data, next);
 });
+export const validateNotificationTypes = catchAsync(async (req, res, next) => {
+  const data = {
+    name: req.body.name,
+  };
+  const schema = Joi.object({
+    name: Joi.string().required(),
+  });
+
+  validator(schema, data, next);
+});
 
 export const validateEduLanguage = catchAsync(async (req, res, next) => {
   const data = {
