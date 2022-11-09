@@ -3,6 +3,6 @@ import apiRouter from "./api/index";
 
 const allRoutes = express.Router();
 
-allRoutes.use("/", apiRouter);
+allRoutes.use("/sis", apiRouter);
 
 export default allRoutes;

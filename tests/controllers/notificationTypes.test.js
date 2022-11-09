@@ -17,7 +17,7 @@ const { expect } = chai;
 
 describe("Education bind notification types", () => {
   it("Should return 200 status with all available notification types", (done) => {
-    api.get("/v1/notifications/types").end((err, res) => {
+    api.get("/sis/v1/notifications/types").end((err, res) => {
       const { status } = res.body;
       expect(res.status).to.equal(ok);
       expect(status).to.equal("success");
@@ -26,7 +26,7 @@ describe("Education bind notification types", () => {
   });
 
   it("Should return 200 if a notification type with id exist", (done) => {
-    api.get("/v1/notifications/types/1").end((err, res) => {
+    api.get("/sis/v1/notifications/types/1").end((err, res) => {
       const { status } = res.body;
       expect(res.status).to.equal(ok);
       expect(status).to.equal("success");
@@ -35,7 +35,7 @@ describe("Education bind notification types", () => {
   });
 
   it("Should return 404 if a notification type with id doesn't exist", (done) => {
-    api.get("/v1/notifications/types/999").end((err, res) => {
+    api.get("/sis/v1/notifications/types/999").end((err, res) => {
       const { message } = res.body;
       expect(res.status).to.equal(notFound);
       expect(message).to.equal(noContent);
@@ -45,7 +45,7 @@ describe("Education bind notification types", () => {
 
   it("Should return 400 if  you try to create notification type with no name", (done) => {
     api
-      .post("/v1/notifications/types")
+      .post("/sis/v1/notifications/types")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -61,7 +61,7 @@ describe("Education bind notification types", () => {
 
   it("Should return 201 if a notification type was created successfully", (done) => {
     api
-      .post("/v1/notifications/types")
+      .post("/sis/v1/notifications/types")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -77,7 +77,7 @@ describe("Education bind notification types", () => {
 
   it("Should return 404 if a notification type you try to update doesn't exist", (done) => {
     api
-      .patch("/v1/notifications/types/999")
+      .patch("/sis/v1/notifications/types/999")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -93,7 +93,7 @@ describe("Education bind notification types", () => {
 
   it("Should return 200 if a notification type was updated successfully", (done) => {
     api
-      .patch("/v1/notifications/types/1")
+      .patch("/sis/v1/notifications/types/1")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -108,7 +108,7 @@ describe("Education bind notification types", () => {
   });
   it("Should return 200 if a notification type was deleted successfully", (done) => {
     api
-      .delete("/v1/notifications/types/1")
+      .delete("/sis/v1/notifications/types/1")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
