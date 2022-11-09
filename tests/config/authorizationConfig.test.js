@@ -17,7 +17,7 @@ let credentials = {
 describe("Tests Authorization", () => {
   it("Should return 200 status with Access and refresh token for ebind super admin", (done) => {
     api
-      .post("/v1/edu/auth/login")
+      .post("/sis/v1/edu/auth/login")
       .send(eBindSuperAdmin)
       .end((err, res) => {
         const { status, data } = res.body;

@@ -16,7 +16,7 @@ const { expect } = chai;
 
 describe("Education bind languages", () => {
   it("Should return 200 status with all available languages", (done) => {
-    api.get("/v1/edu/languages").end((err, res) => {
+    api.get("/sis/v1/edu/languages").end((err, res) => {
       const { status } = res.body;
       expect(res.status).to.equal(ok);
       expect(status).to.equal("success");
@@ -25,7 +25,7 @@ describe("Education bind languages", () => {
   });
 
   it("Should return 200 if a language with id exist", (done) => {
-    api.get("/v1/edu/languages/1").end((err, res) => {
+    api.get("/sis/v1/edu/languages/1").end((err, res) => {
       const { status } = res.body;
       expect(res.status).to.equal(ok);
       expect(status).to.equal("success");
@@ -34,7 +34,7 @@ describe("Education bind languages", () => {
   });
 
   it("Should return 404 if a language with id doesn't exist", (done) => {
-    api.get("/v1/edu/languages/2").end((err, res) => {
+    api.get("/sis/v1/edu/languages/2").end((err, res) => {
       const { message } = res.body;
       expect(res.status).to.equal(notFound);
       expect(message).to.equal(noContent);
@@ -44,7 +44,7 @@ describe("Education bind languages", () => {
 
   it("Should return 400 if  you try to create language with no name", (done) => {
     api
-      .post("/v1/edu/languages")
+      .post("/sis/v1/edu/languages")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -60,7 +60,7 @@ describe("Education bind languages", () => {
 
   it("Should return 201 if a language was created successfully", (done) => {
     api
-      .post("/v1/edu/languages")
+      .post("/sis/v1/edu/languages")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -76,7 +76,7 @@ describe("Education bind languages", () => {
 
   it("Should return 404 if a language you try to update doesn't exist", (done) => {
     api
-      .patch("/v1/edu/languages/999")
+      .patch("/sis/v1/edu/languages/999")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -92,7 +92,7 @@ describe("Education bind languages", () => {
 
   it("Should return 200 if a language was updated successfully", (done) => {
     api
-      .patch("/v1/edu/languages/1")
+      .patch("/sis/v1/edu/languages/1")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -107,7 +107,7 @@ describe("Education bind languages", () => {
   });
   it("Should return 200 if a language was deleted successfully", (done) => {
     api
-      .delete("/v1/edu/languages/1")
+      .delete("/sis/v1/edu/languages/1")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
