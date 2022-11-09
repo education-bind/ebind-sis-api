@@ -38,6 +38,14 @@ export default {
       name: "create ebind user",
     },
   },
+  notificationType: {
+    createNotificationType: {
+      name: "school",
+    },
+    updateNotificationType: {
+      name: "ebind",
+    },
+  },
   eduLanguages: {
     createLanguage: {
       name: "english",

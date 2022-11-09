@@ -8,15 +8,16 @@ import credentials from "../config/authorizationConfig.test.js";
 
 const { noContent, contentDeleted } = messages;
 const { ok, notFound, badRequest, created } = statusCode;
-const { createFaculty, updateFaculty } = mockData.eduFaculties;
+const { createNotificationType, updateNotificationType } =
+  mockData.notificationType;
 
 chai.use(chaiHttp);
 const api = chai.request(server).keepOpen();
 const { expect } = chai;
 
-describe("Education bind faculties", () => {
-  it("Should return 200 status with all available faculties", (done) => {
-    api.get("/v1/edu/faculties").end((err, res) => {
+describe("Education bind notification types", () => {
+  it("Should return 200 status with all available notification types", (done) => {
+    api.get("/v1/notifications/types").end((err, res) => {
       const { status } = res.body;
       expect(res.status).to.equal(ok);
       expect(status).to.equal("success");
@@ -24,8 +25,17 @@ describe("Education bind faculties", () => {
     });
   });
 
-  it("Should return 404 if a faculty with id doesn't exist", (done) => {
-    api.get("/v1/edu/faculties/2").end((err, res) => {
+  it("Should return 200 if a notification type with id exist", (done) => {
+    api.get("/v1/notifications/types/1").end((err, res) => {
+      const { status } = res.body;
+      expect(res.status).to.equal(ok);
+      expect(status).to.equal("success");
+      done();
+    });
+  });
+
+  it("Should return 404 if a notification type with id doesn't exist", (done) => {
+    api.get("/v1/notifications/types/999").end((err, res) => {
       const { message } = res.body;
       expect(res.status).to.equal(notFound);
       expect(message).to.equal(noContent);
@@ -33,9 +43,9 @@ describe("Education bind faculties", () => {
     });
   });
 
-  it("Should return 400 if  you try to create faculty with no data", (done) => {
+  it("Should return 400 if  you try to create notification type with no name", (done) => {
     api
-      .post("/v1/edu/faculties")
+      .post("/v1/notifications/types")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -49,14 +59,14 @@ describe("Education bind faculties", () => {
       });
   });
 
-  it("Should return 201 if a faculty was created successfully", (done) => {
+  it("Should return 201 if a notification type was created successfully", (done) => {
     api
-      .post("/v1/edu/faculties")
+      .post("/v1/notifications/types")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
       )
-      .send(createFaculty)
+      .send(createNotificationType)
       .end((err, res) => {
         const { data } = res.body;
         expect(res.status).to.equal(created);
@@ -65,23 +75,14 @@ describe("Education bind faculties", () => {
       });
   });
 
-  it("Should return 200 if a faculty with id exist", (done) => {
-    api.get("/v1/edu/faculties/1").end((err, res) => {
-      const { status } = res.body;
-      expect(res.status).to.equal(ok);
-      expect(status).to.equal("success");
-      done();
-    });
-  });
-
-  it("Should return 404 if a faculty you try to update doesn't exist", (done) => {
+  it("Should return 404 if a notification type you try to update doesn't exist", (done) => {
     api
-      .patch("/v1/edu/faculties/999")
+      .patch("/v1/notifications/types/999")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
       )
-      .send(updateFaculty)
+      .send(updateNotificationType)
       .end((err, res) => {
         const { data } = res.body;
         expect(res.status).to.equal(notFound);
@@ -90,14 +91,14 @@ describe("Education bind faculties", () => {
       });
   });
 
-  it("Should return 200 if a faculty was updated successfully", (done) => {
+  it("Should return 200 if a notification type was updated successfully", (done) => {
     api
-      .patch("/v1/edu/faculties/1")
+      .patch("/v1/notifications/types/1")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
       )
-      .send(updateFaculty)
+      .send(updateNotificationType)
       .end((err, res) => {
         const { data } = res.body;
         expect(res.status).to.equal(ok);
@@ -105,9 +106,9 @@ describe("Education bind faculties", () => {
         done();
       });
   });
-  it("Should return 200 if a faculty was deleted successfully", (done) => {
+  it("Should return 200 if a notification type was deleted successfully", (done) => {
     api
-      .delete("/v1/edu/faculties/1")
+      .delete("/v1/notifications/types/1")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`

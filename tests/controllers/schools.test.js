@@ -16,7 +16,7 @@ const { expect } = chai;
 
 describe("Education bind schools", () => {
   it("Should return 200 status with all available schools", (done) => {
-    api.get("/api/v1/edu/schools").end((err, res) => {
+    api.get("/v1/edu/schools").end((err, res) => {
       const { status } = res.body;
       expect(res.status).to.equal(ok);
       expect(status).to.equal("success");
@@ -25,7 +25,7 @@ describe("Education bind schools", () => {
   });
 
   it("Should return 404 if a school with id doesn't exist", (done) => {
-    api.get("/api/v1/edu/schools/2").end((err, res) => {
+    api.get("/v1/edu/schools/2").end((err, res) => {
       const { message } = res.body;
       expect(res.status).to.equal(notFound);
       expect(message).to.equal(noContent);
@@ -35,7 +35,7 @@ describe("Education bind schools", () => {
 
   it("Should return 400 if  you try to create school with no data", (done) => {
     api
-      .post("/api/v1/edu/schools")
+      .post("/v1/edu/schools")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -51,7 +51,7 @@ describe("Education bind schools", () => {
 
   it("Should return 201 if a school was created successfully", (done) => {
     api
-      .post("/api/v1/edu/schools")
+      .post("/v1/edu/schools")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -66,7 +66,7 @@ describe("Education bind schools", () => {
   });
 
   it("Should return 200 if a school with id exist", (done) => {
-    api.get("/api/v1/edu/schools/1").end((err, res) => {
+    api.get("/v1/edu/schools/1").end((err, res) => {
       const { status } = res.body;
       expect(res.status).to.equal(ok);
       expect(status).to.equal("success");
@@ -76,7 +76,7 @@ describe("Education bind schools", () => {
 
   it("Should return 404 if a school you try to update doesn't exist", (done) => {
     api
-      .patch("/api/v1/edu/schools/999")
+      .patch("/v1/edu/schools/999")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -92,7 +92,7 @@ describe("Education bind schools", () => {
 
   it("Should return 200 if a school was updated successfully", (done) => {
     api
-      .patch("/api/v1/edu/schools/1")
+      .patch("/v1/edu/schools/1")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -107,7 +107,7 @@ describe("Education bind schools", () => {
   });
   it("Should return 200 if a school was deleted successfully", (done) => {
     api
-      .delete("/api/v1/edu/schools/1")
+      .delete("/v1/edu/schools/1")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
