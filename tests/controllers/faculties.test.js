@@ -16,7 +16,7 @@ const { expect } = chai;
 
 describe("Education bind faculties", () => {
   it("Should return 200 status with all available faculties", (done) => {
-    api.get("/api/v1/edu/faculties").end((err, res) => {
+    api.get("/v1/edu/faculties").end((err, res) => {
       const { status } = res.body;
       expect(res.status).to.equal(ok);
       expect(status).to.equal("success");
@@ -25,7 +25,7 @@ describe("Education bind faculties", () => {
   });
 
   it("Should return 404 if a faculty with id doesn't exist", (done) => {
-    api.get("/api/v1/edu/faculties/2").end((err, res) => {
+    api.get("/v1/edu/faculties/2").end((err, res) => {
       const { message } = res.body;
       expect(res.status).to.equal(notFound);
       expect(message).to.equal(noContent);
@@ -35,7 +35,7 @@ describe("Education bind faculties", () => {
 
   it("Should return 400 if  you try to create faculty with no data", (done) => {
     api
-      .post("/api/v1/edu/faculties")
+      .post("/v1/edu/faculties")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -51,7 +51,7 @@ describe("Education bind faculties", () => {
 
   it("Should return 201 if a faculty was created successfully", (done) => {
     api
-      .post("/api/v1/edu/faculties")
+      .post("/v1/edu/faculties")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -66,7 +66,7 @@ describe("Education bind faculties", () => {
   });
 
   it("Should return 200 if a faculty with id exist", (done) => {
-    api.get("/api/v1/edu/faculties/1").end((err, res) => {
+    api.get("/v1/edu/faculties/1").end((err, res) => {
       const { status } = res.body;
       expect(res.status).to.equal(ok);
       expect(status).to.equal("success");
@@ -76,7 +76,7 @@ describe("Education bind faculties", () => {
 
   it("Should return 404 if a faculty you try to update doesn't exist", (done) => {
     api
-      .patch("/api/v1/edu/faculties/999")
+      .patch("/v1/edu/faculties/999")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -92,7 +92,7 @@ describe("Education bind faculties", () => {
 
   it("Should return 200 if a faculty was updated successfully", (done) => {
     api
-      .patch("/api/v1/edu/faculties/1")
+      .patch("/v1/edu/faculties/1")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -107,7 +107,7 @@ describe("Education bind faculties", () => {
   });
   it("Should return 200 if a faculty was deleted successfully", (done) => {
     api
-      .delete("/api/v1/edu/faculties/1")
+      .delete("/v1/edu/faculties/1")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`

@@ -16,7 +16,7 @@ const { expect } = chai;
 
 describe("Education bind permissions", () => {
   it("Should return 200 status with all available permissions", (done) => {
-    api.get("/api/v1/edu/permissions").end((err, res) => {
+    api.get("/v1/edu/permissions").end((err, res) => {
       const { status } = res.body;
       expect(res.status).to.equal(ok);
       expect(status).to.equal("success");
@@ -25,7 +25,7 @@ describe("Education bind permissions", () => {
   });
 
   it("Should return 200 if a permission with id exist", (done) => {
-    api.get("/api/v1/edu/permissions/1").end((err, res) => {
+    api.get("/v1/edu/permissions/1").end((err, res) => {
       const { status } = res.body;
       expect(res.status).to.equal(ok);
       expect(status).to.equal("success");
@@ -34,7 +34,7 @@ describe("Education bind permissions", () => {
   });
 
   it("Should return 404 if a permission with id doesn't exist", (done) => {
-    api.get("/api/v1/edu/permissions/999").end((err, res) => {
+    api.get("/v1/edu/permissions/999").end((err, res) => {
       const { message } = res.body;
       expect(res.status).to.equal(notFound);
       expect(message).to.equal(noContent);
@@ -44,7 +44,7 @@ describe("Education bind permissions", () => {
 
   it("Should return 400 if  you try to create permission with no name", (done) => {
     api
-      .post("/api/v1/edu/permissions")
+      .post("/v1/edu/permissions")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -60,7 +60,7 @@ describe("Education bind permissions", () => {
 
   it("Should return 201 if a permission was created successfully", (done) => {
     api
-      .post("/api/v1/edu/permissions")
+      .post("/v1/edu/permissions")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -76,7 +76,7 @@ describe("Education bind permissions", () => {
 
   it("Should return 404 if a permission you try to update doesn't exist", (done) => {
     api
-      .patch("/api/v1/edu/permissions/999")
+      .patch("/v1/edu/permissions/999")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -92,7 +92,7 @@ describe("Education bind permissions", () => {
 
   it("Should return 200 if a permission was updated successfully", (done) => {
     api
-      .patch("/api/v1/edu/permissions/1")
+      .patch("/v1/edu/permissions/1")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
@@ -107,7 +107,7 @@ describe("Education bind permissions", () => {
   });
   it("Should return 200 if a permission was deleted successfully", (done) => {
     api
-      .delete("/api/v1/edu/permissions/1")
+      .delete("/v1/edu/permissions/1")
       .set(
         "Authorization",
         `Bearer ${credentials.eBindSuperAdminToken.accessToken}`
