@@ -4,15 +4,14 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert(
-      "notification_types",
+      "notifications",
       [
         {
-          name: "verify email",
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          name: "verify account",
+          userId: 99999,
+          title: "Email verification",
+          link: null,
+          message: "Verify your email",
+          notificationTypeId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -22,6 +21,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("notification_types", null, {});
+    await queryInterface.bulkDelete("notifications", null, {});
   },
 };

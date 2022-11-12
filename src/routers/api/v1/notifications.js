@@ -1,5 +1,12 @@
 import express from "express";
-import { createNotificationTypes, updateNotificationTypes } from "../../../controllers/notificationTypes.controller";
+import {
+  readNotification,
+  readNotifications,
+} from "../../../controllers/notification.controller";
+import {
+  createNotificationTypes,
+  updateNotificationTypes,
+} from "../../../controllers/notificationTypes.controller";
 import {
   isEbindUserLoggedInAndVerified,
   verifyToken,
@@ -17,6 +24,10 @@ router.get("/types/:id", findData("notification_types"), getData);
 router.use(verifyToken);
 
 router.use(isEbindUserLoggedInAndVerified);
+router.get("/", findAllData("notifications"), getData);
+router.get("/:id", findData("notifications"), getData);
+router.patch("/read/", findAllData("notifications"), readNotifications);
+router.patch("/read/:id", findData("notifications"), readNotification);
 router.post("/types/", validateNotificationTypes, createNotificationTypes);
 router.patch(
   "/types/:id",
