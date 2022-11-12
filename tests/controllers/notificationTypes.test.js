@@ -26,7 +26,7 @@ describe("Education bind notification types", () => {
   });
 
   it("Should return 200 if a notification type with id exist", (done) => {
-    api.get("/sis/v1/notifications/types/1").end((err, res) => {
+    api.get("/sis/v1/notifications/types/").end((err, res) => {
       const { status } = res.body;
       expect(res.status).to.equal(ok);
       expect(status).to.equal("success");

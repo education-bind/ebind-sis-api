@@ -1,7 +1,7 @@
 import cors from "cors";
 
 const urls = {
-  prod: "https://www.educationbind.com",
+  prod: "https://educationbind.com",
   dev: "http://localhost:3000",
   app: "http://localhost:5000",
 };

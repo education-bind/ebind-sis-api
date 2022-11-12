@@ -11,7 +11,8 @@ const {
   edu_languages,
   schools,
   edu_faculties,
-  notification_types
+  notification_types,
+  notifications,
 } = db;
 const { notFound, serverError } = statusCode;
 const { noContent, wrongDatabase } = messages;
@@ -59,6 +60,9 @@ export const findData = (database) => {
       case "notification_types":
         databaseTable = notification_types;
         return findInDatabase();
+      case "notifications":
+        databaseTable = notifications;
+        return findInDatabase();
       default:
         return next(new AppError(wrongDatabase, serverError));
     }
@@ -104,6 +108,9 @@ export const findAllData = (database) => {
         return findInDatabase();
       case "notification_types":
         databaseTable = notification_types;
+        return findInDatabase();
+      case "notifications":
+        databaseTable = notifications;
         return findInDatabase();
       default:
         return next(new AppError(wrongDatabase, serverError));
