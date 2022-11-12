@@ -100,4 +100,15 @@ export default {
       logoImage: "kaat.png",
     },
   },
+  announcements: {
+    createAnnouncement: {
+      title: "ebind announcements",
+      message: "we are about to update",
+      link: "https://educationbind.com",
+      publish: true,
+    },
+    updateAnnouncement: {
+      title: "ebind updates",
+    },
+  },
 };

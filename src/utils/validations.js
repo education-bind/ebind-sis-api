@@ -221,3 +221,38 @@ export const validateUpdateEduFaculties = catchAsync(async (req, res, next) => {
 
   validator(schema, data, next);
 });
+export const validateEduAnnouncements = catchAsync(async (req, res, next) => {
+  const data = {
+    title: req.body.title,
+    message: req.body.message,
+    link: req.body.link,
+    publish: req.body.publish,
+  };
+  const schema = Joi.object({
+    title: Joi.string().required(),
+    message: Joi.string().required(),
+    link: Joi.string().required(),
+    publish: Joi.boolean(),
+  });
+
+  validator(schema, data, next);
+});
+
+export const validateUpdateEduAnnouncements = catchAsync(
+  async (req, res, next) => {
+    const data = {
+      title: req.body.title,
+      message: req.body.message,
+      link: req.body.link,
+      publish: req.body.publish,
+    };
+    const schema = Joi.object({
+      title: Joi.string(),
+      message: Joi.string(),
+      link: Joi.string(),
+      publish: Joi.boolean(),
+    });
+
+    validator(schema, data, next);
+  }
+);

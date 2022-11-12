@@ -2,7 +2,7 @@ import express from "express";
 import {
   readNotification,
   readNotifications,
-} from "../../../controllers/notification.controller";
+} from "../../../controllers/notifications.controller";
 import {
   createNotificationTypes,
   updateNotificationTypes,
